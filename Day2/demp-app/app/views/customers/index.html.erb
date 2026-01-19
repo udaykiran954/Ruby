@@ -1,0 +1,27 @@
+<p class="text-success"><%= notice %></p>
+
+<% content_for :title, "Customers" %>
+
+<h1 class="text-center mb-4 text-primary" style="font-family: Candara;">
+  Customers
+</h1>
+
+<div id="customers" class="container">
+  <div class="row">
+    <% @customers.each do |customer| %>
+      <div class="col-md-4 mb-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <%= render customer %>
+
+            <%= link_to "Show this customer", customer, class: "btn btn-outline-primary mt-2 w-100" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <%= link_to "Add customer", new_customer_path, class: "btn btn-success" %>
+</div>

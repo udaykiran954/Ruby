@@ -1,0 +1,60 @@
+<p class="text-success text-center"><%= notice %></p>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Product Details</h4>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Name:</div>
+            <div class="col-8"><%= @product.name %></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Description:</div>
+            <div class="col-8"><%= @product.description %></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Price:</div>
+            <div class="col-8">₹ <%= @product.price %></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Stock:</div>
+            <div class="col-8"><%= @product.stock %></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Status:</div>
+            <div class="col-8">
+              <% if @product.is_active %>
+                <span class="badge bg-success">Active</span>
+              <% else %>
+                <span class="badge bg-danger">Inactive</span>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-footer text-center">
+          <%= link_to "Edit", edit_product_path(@product), class: "btn btn-warning me-2" %>
+          <%= link_to "Back", products_path, class: "btn btn-secondary me-2" %>
+
+          <%= button_to "Delete", @product,
+                method: :delete,
+                data: { confirm: "Are you sure?" },
+                class: "btn btn-danger d-inline" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

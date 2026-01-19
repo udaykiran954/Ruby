@@ -1,0 +1,43 @@
+<p class="text-success text-center"><%= notice %></p>
+
+<% content_for :title, "Products" %>
+<div>
+<% Product.all.limit(10).each do |p|
+<div>
+<h1>name: <% p.name %> </h1>
+<h2>description:<% p.description %> </h2>
+<h3>price: <% p.price %> </h3>
+<h3>stock: <% p.stock %></h3>
+<h3>is_active: <% (p.is_active)?"YES":"NO" %></h3>
+</div>
+end %>
+
+</div>
+
+<h1 class="text-center mb-4">Products</h1>
+<h1 class="">First 10 products</h1>
+
+<div class="container">
+  <table class="table table-bordered table-hover text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <%= render product %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-center mt-3">
+    <%= link_to "Add Product", new_product_path, class: "btn btn-success" %>
+  </div>
+</div>

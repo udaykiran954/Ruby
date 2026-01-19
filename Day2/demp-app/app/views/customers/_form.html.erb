@@ -1,0 +1,31 @@
+<%= form_with(model: customer, class: "needs-validation") do |form| %>
+  
+  <% if customer.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>
+        <%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:
+      </h5>
+
+      <ul class="mb-0">
+        <% customer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter name" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control", placeholder: "Enter email" %>
+  </div>
+
+  <div class="text-center">
+    <%= form.submit class: "btn btn-primary px-4" %>
+  </div>
+
+<% end %>

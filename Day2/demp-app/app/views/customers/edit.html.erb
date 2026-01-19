@@ -1,0 +1,25 @@
+<% content_for :title, "Editing Customer" %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      
+      <div class="card shadow-lg">
+        <div class="card-header bg-warning text-white text-center">
+          <h3 class="mb-0">Edit Customer</h3>
+        </div>
+
+        <div class="card-body">
+          <%= render "form", customer: @customer %>
+        </div>
+
+        <div class="card-footer text-center">
+          <%= link_to "Show Customer", @customer, class: "btn btn-outline-primary me-2" %>
+          <%= link_to "Back to Customers", customers_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

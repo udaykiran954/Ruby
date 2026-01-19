@@ -1,0 +1,16 @@
+<tr id="<%= dom_id product %>">
+  <td><%= product.name %></td>
+  <td><%= product.description %></td>
+  <td>₹ <%= product.price %></td>
+  <td><%= product.stock %></td>
+  <td>
+    <% if product.is_active %>
+      <span class="text-success fs-4">✔</span>
+    <% else %>
+      <span class="text-danger fs-4">✖</span>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to "Show", product, class: "btn btn-info btn-sm" %>
+  </td>
+</tr>
