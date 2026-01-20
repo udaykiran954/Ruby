@@ -95,6 +95,184 @@ puma.rb default server
 member route
 collection route
 nested route
+Ruby
+
+Variables: 
+
+there are 5 types of Variables
+1 global Variables(we can declare a global variable by using $ symbol ex:- $college_name = "IIIT")
+2 class Variables(we can declare class variables by using @@ symbol ex:- @@count = 0)
+3 instance Variables(we can declare instance variable by using @ symbol ex:-@name = "uday")
+4 local Variables(we can declare local variable with normally with any name by foloowing naming rules ex:- a = 10)
+5 constant Variables(we an declare constant variables with uppercaseletters ex:- PI = 3.14)
+
+Datatypes:
+
+ruby is dynamically typed language we don't need to mention datatypes ex:- a = 10,b=19.10,c = "uday",d = :uday,flag = true
+Integer 
+String and Symbol
+boolean/nil
+
+String: is mutable in ruby  we can create a string using literalsex:- name = "uday"
+Symbol: is immmutable we can create a symbol using colon symbol ex:- name = :uday
+
+Note: we can check which datatype of a variable using class method 
+ex:- a = 10, a.class ->Integer
+a = :uday a.class ->symbol
+b= "uday" b.class->string,etc...
+ 
+Input from User:
+IN ruby we can take the input from the user by the gets.chomp method 
+ex:-
+a = gets.chomp
+puts a
+
+TypeConversion:
+we have methods to convert one datatype to another datatype
+ex:-
+a = "10"
+b = a.to_i
+to_i --> it will converts into Integer
+to_s --> it will converts into string
+to_f -->it will converts into float
+
+Day6:
+------------------------>
+Loops in ruby:
+
+for:
+ for i in 1..10 # i in 10 to 20 range
+   puts i
+ end
+
+while:
+ i = 1
+ while i<=5
+     puts "hi"
+     i+=1
+ end
+
+loop:
+ m = 1
+ loop do
+     puts "hello"
+     break if m==5 
+     m+=1;
+ end
+until:
+ j = 0
+ until j>5
+     puts j
+     j = j+1
+ end
+
+break:
+ i= 7
+ loop do
+     puts "hello"
+     break if i==10 
+      i+=1;
+ end
+
+next: 
+for k in 1..5
+    next if k%2==0
+    puts k
+end
+
+redo:
+ flag = true
+ for x in 2..4
+     puts x
+     if x==2 && flag==true
+         flag = false
+         redo
+     end
+ end
+
+
+ Array Methods:
+
+ select:
+ arr = [1,2,3,4,5,6,7]
+ arr2  = arr.select{ |i| i%2==0 } # it filter the elements based on condition and it return an array
+ print arr2
+
+each: 
+ arr2.each do |i|
+     puts i
+ end
+
+reject: 
+print arr.reject{|i| i%2==0} # it reject the elements based on condition and it return an array
+
+Note: print arr.select!{|i| i>=3} # ! this symbol modifies the original array 
+
+all:
+ puts arr.all?{|n| n>=5} # if all elements statisfies the condition it will give true otherwise true
+
+any:
+ puts arr.any?{|n| n>=5} # if any one element statisfies the condition it will give true otherwise false
+
+map: 
+ num = [1,2,3,4,5,6]
+ num2 = num.map{|m| m*2}
+ print num
+ puts
+ print num2
+
+each:
+ print num.each{|i| i*2}
+
+collect:
+ num3 = num.collect{|i| i*3}
+ print num3
+
+Day7
+------------------------------------->
+Inheritance:
+ ---->only single level Inheritance is possible in ruby
+ we can represent Inheritance by using < symbol
+ex:
+
+class base
+end
+
+class child < base
+end 
+Super --> super keyword look up to the ancestors for a method until a method found
+Object Hierachy: 
+Child
+  |
+Base
+  |  
+Object
+  |
+Kernel
+  |
+BasicObject
+ex:-
+
+class Base
+    def welcome
+        "welcoming you from base class"
+    end
+end
+
+class Child < Base
+    def welcome
+        super
+        "welocming you from child class"
+    end
+end
+
+obj = Child.new
+puts obj.welcome
+puts Child.ancestors   # Child->Base->Object->Kernel->BasicObject (inheritance hieracy method look up)
+
+output:- welcoming you from base class
+         welocming you from child class
+
 
 
 

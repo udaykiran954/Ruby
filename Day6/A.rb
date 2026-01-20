@@ -5,14 +5,12 @@
 # puts i
 # end
 
-
 # #while loop
 # i = 1
 # while i<=5
 #     puts "hi"
 #     i+=1
 # end
-
 
 # #loop
 # m = 1
@@ -21,15 +19,12 @@
 #     break if m==5 
 #     m+=1;
 # end
-
 #until
 # j = 0
-# until j<5 do
+# until j>5
 #     puts j
-#     j+=1
+#     j = j+1
 # end
-
-
 # #break
 # # i= 7
 # # loop do
@@ -53,6 +48,8 @@
 #         redo
 #     end
 # end
+
+
 # loop do
 #     aq = gets.chomp
 #     break if aq==10
@@ -66,42 +63,42 @@
 #all
 #inject
 #select 
-arr = [1,2,3,4,5,6,7]
-arr2  = arr.select{ |i| i%2==0 } # it filter the elements based on condition and it return an array
+# arr = [1,2,3,4,5,6,7]
+# arr2  = arr.select{ |i| i%2==0 } # it filter the elements based on condition and it return an array
 
-print arr2
-puts
-# each 
+# print arr2
+# puts
+# # each 
 
-arr2.each do |i|
-    puts i
-end
+# arr2.each do |i|
+#     puts i
+# end
 
 #reject 
 
-print arr.reject{|i| i%2==0} # it reject the elements based on condition and it return an array
-puts
-print arr.select!{|i| i>=3} # ! this symbol modifies the original array 
-#all
-puts
-puts arr.all?{|n| n>=5} # if all elements statisfies the condition it will give true otherwise true
-#any
-puts arr.any?{|n| n>=5} # if any one element statisfies the condition it will give true otherwise false
-#map 
-num = [1,2,3,4,5,6]
-num2 = num.map{|m| m*2}
-print num
-puts
-print num2
+# print arr.reject{|i| i%2==0} # it reject the elements based on condition and it return an array
+# puts
+# print arr.select!{|i| i>=3} # ! this symbol modifies the original array 
+# #all
+# puts
+# puts arr.all?{|n| n>=5} # if all elements statisfies the condition it will give true otherwise true
+# #any
+# puts arr.any?{|n| n>=5} # if any one element statisfies the condition it will give true otherwise false
+# #map 
+# num = [1,2,3,4,5,6]
+# num2 = num.map{|m| m*2}
+# print num
+# puts
+# print num2
 
-# collect
-# each
-puts
-print num.each{|i| i*2}
-puts 
-# collect
-num3 = num.collect{|i| i*3}
-print num3
-puts 
-print num
+# # collect
+# # each
+# puts
+# print num.each{|i| i*2}
+# puts 
+# # collect
+# num3 = num.collect{|i| i*3}
+# print num3
+# puts 
+# print num
 
