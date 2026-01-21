@@ -3,12 +3,12 @@
   <td><%= product.description %></td>
   <td>₹ <%= product.price %></td>
   <td><%= product.stock %></td>
-  <td>
-    <% if product.is_active %>
-      <span class="text-success fs-4">✔</span>
-    <% else %>
-      <span class="text-danger fs-4">✖</span>
-    <% end %>
+   <td>
+  <% if product.is_active %>
+    <span style="color: green; font-size: 40px;">●</span>
+  <% else %>
+    <span style="color: red; font-size: 40px;">●</span>
+  <% end %>
   </td>
   <td>
     <%= link_to "Show", product, class: "btn btn-info btn-sm" %>
