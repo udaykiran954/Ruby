@@ -29,3 +29,11 @@ puts obj.puts
 # puts obj.respond_to?(:welcome)
 # puts "uday".respond_to?(:upcase)
 # puts 10.respond_to?(:round)
+puts obj.respond_to?(:puts)
+
+
+class Uday
+end
+
+u = Uday.new
+puts u.respond_to?(:puts)
