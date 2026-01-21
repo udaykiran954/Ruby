@@ -272,3 +272,111 @@ puts Child.ancestors   # Child->Base->Object->Kernel->BasicObject (inheritance h
 
 output:- welcoming you from base class
          welocming you from child class
+.ancestors method: ->it helps to find all method lookups from BasicObject to the child class
+ex:-
+puts Child.ancestors
+output:
+Child
+base
+Object
+Kernel
+BasicObject
+
+objname.respond_to?(:methodname) --> this method return true or false to check given method is belongs to given class or not 
+ex:-
+obj = kernel.new
+obj.respond_to?(:puts) output:true
+"uday".respond_to?(:upcase) output:true
+
+
+Day8:
+
+Conditional Statment:
+
+stock = 20
+is_available = false
+if stock > 0
+    is_available = true
+else
+    puts "Item not available"
+end
+
+puts is_available
+
+# Ternary statements
+is_active = true
+a = (is_active)? "present": "not present"
+puts a
+
+# else if
+
+price = 500
+discount = 0
+
+if price>=100 && price<200
+    discount  = 10
+elsif price>=200 && price<300
+     discount = 20
+elsif price>=300 && price<400
+    discount = 30
+elsif price>=400 && price<500
+    discount = 40
+elsif price>=500 && price<600
+    discount = 50
+else 
+    discount = 5
+
+puts discount
+ 
+
+#case
+case 
+when 100..200
+    discount = 10
+when 201..300
+    discount = 20
+when 301..400
+    discount = 30
+when 401..500
+    discount = 40
+when 500..600
+    discount = 50
+else 
+    discount = 5
+end
+
+puts discount
+
+#unless
+email = true
+unless email
+    puts "email unavailable"
+else
+    puts "email available"
+end
+
+
+
+Methods:
+
+we can use public, private, protected as acccess modifiers for methods in ruby 
+private methods---> The methods of a class which are declared private are called within the class only, private access modifier is the most secure access modifier
+public methods--> we can access anywhere
+protected--->The methods of a class which are declared protected can only be called from the class in which it is declared and the classes derived from it
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
