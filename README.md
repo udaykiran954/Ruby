@@ -1,6 +1,7 @@
+# Day1
 First Day at DaySpring Technologies as intern-> completed all installations(Ruby,Rails) and compiled my first program .......
 
-Ruby 
+# Ruby 
 ->Everything in ruby is object (method also acts a object)
 ->Follow SOLID principals where I is silent
 ->very simple and readable
@@ -15,7 +16,7 @@ Rails
 
 
 
-
+# Day2
 Second Day at Dayspring Technologies as intern-> 
 
 -> to create a rails application with database-----> rails new applicatoname -d databasetype
@@ -37,7 +38,8 @@ rails db:migrate  used in production we get exception if we can't use this comma
 
 
 
-Day3 
+# Day3 
+
 
 Syntactic sugar 
 
@@ -73,7 +75,7 @@ boot.rb
 application.rb
 
 
-
+# Day4
 secrets.rb --->we put secured data
 
 creditinal.yml used for different environment
@@ -96,8 +98,8 @@ member route
 collection route
 nested route
 Ruby
-
-Variables: 
+# Day5
+# Variables: 
 
 there are 5 types of Variables
 1 global Variables(we can declare a global variable by using $ symbol ex:- $college_name = "IIIT")
@@ -106,28 +108,28 @@ there are 5 types of Variables
 4 local Variables(we can declare local variable with normally with any name by foloowing naming rules ex:- a = 10)
 5 constant Variables(we an declare constant variables with uppercaseletters ex:- PI = 3.14)
 
-Datatypes:
+# Datatypes:
 
 ruby is dynamically typed language we don't need to mention datatypes ex:- a = 10,b=19.10,c = "uday",d = :uday,flag = true
 Integer 
 String and Symbol
 boolean/nil
 
-String: is mutable in ruby  we can create a string using literalsex:- name = "uday"
+# String: is mutable in ruby  we can create a string using literalsex:- name = "uday"
 Symbol: is immmutable we can create a symbol using colon symbol ex:- name = :uday
 
-Note: we can check which datatype of a variable using class method 
+# Note: we can check which datatype of a variable using class method 
 ex:- a = 10, a.class ->Integer
 a = :uday a.class ->symbol
 b= "uday" b.class->string,etc...
  
-Input from User:
+# Input from User:
 IN ruby we can take the input from the user by the gets.chomp method 
 ex:-
 a = gets.chomp
 puts a
 
-TypeConversion:
+# TypeConversion:
 we have methods to convert one datatype to another datatype
 ex:-
 a = "10"
@@ -136,37 +138,37 @@ to_i --> it will converts into Integer
 to_s --> it will converts into string
 to_f -->it will converts into float
 
-Day6:
+# Day6:
 ------------------------>
-Loops in ruby:
+# Loops in ruby:
 
-for:
+# for:
  for i in 1..10 # i in 10 to 20 range
    puts i
  end
 
-while:
+# while:
  i = 1
  while i<=5
      puts "hi"
      i+=1
  end
 
-loop:
+# loop:
  m = 1
  loop do
      puts "hello"
      break if m==5 
      m+=1;
  end
-until:
+# until:
  j = 0
  until j>5
      puts j
      j = j+1
  end
 
-break:
+# break:
  i= 7
  loop do
      puts "hello"
@@ -174,13 +176,13 @@ break:
       i+=1;
  end
 
-next: 
+# next: 
 for k in 1..5
     next if k%2==0
     puts k
 end
 
-redo:
+# redo:
  flag = true
  for x in 2..4
      puts x
@@ -191,46 +193,46 @@ redo:
  end
 
 
- Array Methods:
+# Array Methods:
 
- select:
+ # select:
  arr = [1,2,3,4,5,6,7]
  arr2  = arr.select{ |i| i%2==0 } # it filter the elements based on condition and it return an array
  print arr2
 
-each: 
+# each: 
  arr2.each do |i|
      puts i
  end
 
-reject: 
+# reject: 
 print arr.reject{|i| i%2==0} # it reject the elements based on condition and it return an array
 
-Note: print arr.select!{|i| i>=3} # ! this symbol modifies the original array 
+# Note: print arr.select!{|i| i>=3} # ! this symbol modifies the original array 
 
-all:
+# all:
  puts arr.all?{|n| n>=5} # if all elements statisfies the condition it will give true otherwise true
 
-any:
+# any:
  puts arr.any?{|n| n>=5} # if any one element statisfies the condition it will give true otherwise false
 
-map: 
+# map: 
  num = [1,2,3,4,5,6]
- num2 = num.map{|m| m*2}
+ num2 = num.map{|m| m*2} -->it returns new array
  print num
  puts
  print num2
 
 each:
- print num.each{|i| i*2}
+ print num.each{|i| i*2} -->used to iterate
 
-collect:
+collect:--> similar to map
  num3 = num.collect{|i| i*3}
  print num3
 
-Day7
+# Day7
 ------------------------------------->
-Inheritance:
+# Inheritance:
  ---->only single level Inheritance is possible in ruby
  we can represent Inheritance by using < symbol
 ex:
@@ -289,9 +291,10 @@ obj.respond_to?(:puts) output:true
 "uday".respond_to?(:upcase) output:true
 
 
-Day8:
+# Day8:
+------------------------->
 
-Conditional Statment:
+# Conditional Statment:
 
 stock = 20
 is_available = false
@@ -308,7 +311,7 @@ is_active = true
 a = (is_active)? "present": "not present"
 puts a
 
-# else if
+# elsif
 
 price = 500
 discount = 0
@@ -329,7 +332,7 @@ else
 puts discount
  
 
-#case
+# case
 case 
 when 100..200
     discount = 10
@@ -347,7 +350,7 @@ end
 
 puts discount
 
-#unless
+# unless
 email = true
 unless email
     puts "email unavailable"
@@ -357,12 +360,35 @@ end
 
 
 
-Methods:
+# Methods:
 
 we can use public, private, protected as acccess modifiers for methods in ruby 
 private methods---> The methods of a class which are declared private are called within the class only, private access modifier is the most secure access modifier
 public methods--> we can access anywhere
 protected--->The methods of a class which are declared protected can only be called from the class in which it is declared and the classes derived from it
+# DAY9
+------------------->
+# Rails Validations:
+
+we can validate the fields in 2 ways 
+1-->through UI
+2-->through Model
+
+--->Through UI triggered at the time of entering the fields
+-->Through Model will triggered at the time of submitting
+Through Model ->we can validate the columns by using inbuild validations like below
+    validates :name, format: { with: /\A[a-zA-Z]+\z/, message: "Only letters are allowed" }
+    validates :stock, numericality: { greater_than_or_equal_to: 10 }-->it helps us make stock should be greater than 10
+    validates :price, numericality: { greater_than_or_equal_to: 100 }--->it helps us to make price should be greater than 100
+    validates :description, length: { maximum: 500 } -->it helps us to make description should have length lesser than or equal to 500
+
+we can do custom validatons for the columns like below--->
+validate :check_price
+    def check_price
+        if stock == 0 && price>0
+            errors.add "this is not allowed"
+        end
+    end
 
 
 
