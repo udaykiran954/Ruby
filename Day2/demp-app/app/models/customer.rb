@@ -1,9 +1,12 @@
 class Customer < ApplicationRecord
    validates :name, format: { with: /\A[a-zA-Z ]+\z/, message: "Only letters are allowed" }
-   validates :email, presence: true, uniqueness: true  
+   # validates :email, presence: true, uniqueness: true  
    validate :check_profanity
+   scope :unique_emails, -> {where(email: "124@gmail.com").select(:email).distinct}
+   scope :blacklisted_customers, ->(customer_ids) { where(id: customer_ids) } 
+  
 
-BAD_WORDS = ["badword1", "badword2","sudhamani"]
+BAD_WORDS = ["badword1", "badword2"]
   def check_profanity
     if BAD_WORDS.any? { |word| name.to_s.downcase.include?(word) }
       errors.add(:name, "has profanity problem")

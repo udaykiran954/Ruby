@@ -390,6 +390,12 @@ validate :check_price
         end
     end
 
+# scope
+
+used for repeated query 
+method chaning
+
+
 
 
 

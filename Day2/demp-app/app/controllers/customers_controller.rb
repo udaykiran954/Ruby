@@ -3,16 +3,22 @@ class CustomersController < ApplicationController
 
   # GET /customers or /customers.json
   def index
-    @customers = Customer.all
+    list_of_customers = [1,2,3]
+    #@customers = Customer.blacklisted_customers(list_of_customers)
+     @customers = Customer.all
+    # @customers = Customer.unique_emails it will give only emails not a record
   end
 
+  def blacklisted_customers
+    @customers = Customer.blacklisted_customers([1,2,3,4,5])
+  end
   # GET /customers/1 or /customers/1.json
   def show
   end
 
   # GET /customers/new
   def new
-    @customer = Customer.new
+    # @customers = Customer.all
   end
 
   # GET /customers/1/edit

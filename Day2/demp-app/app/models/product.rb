@@ -4,29 +4,23 @@ class Product < ApplicationRecord
     # @stock = Product.all.limit(10).pluck(:stock) 
     # validates :stock, length: { minimum: 10, maximum: 20 }
     validates :name, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "Only alphanumeric allowed" }
-    validates :stock, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 20}, if: :is_active?
-    validates :price, numericality: { greater_than_or_equal_to: 100 }
+    #validates :stock, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 20}, if: :is_active?
+    #validates :price, numericality: { greater_than_or_equal_to: 100 }
     validates :description, length: { maximum: 500 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "special characters are not allowed"}
     validates :is_active, acceptance: true
+    #validate :check_price
 
-    # validate :check_price
-    # def check_price
-    #     if stock == 0 && price>0
-    #         errors.add "this is not allowed"
-    #     end
-    # end
-
-
-
-
-    validate :check_price
+    scope :out_of_stock, -> {where("stock <= ?", 0)}
+   # scope :test_scope, -> query{} #we can write the raw sql query
+   # scope :out_of_stock, -> { where(stock: 0)}
+   # scope :whitelisted_products,  -> { where("id IN (?)", [1, 2, 3]) }
     def check_price
         if price>0 && !is_active
             errors.add :price ,"when price greater than 0 when isactive is true vice versa"
         end
     end
 
-    validate :check_stock
+   # validate :check_stock
     def check_stock
         if stock>0 && !is_active
             errors.add :stock ,"when stock greater than 0 when isactive is true vice versa"
