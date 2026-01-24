@@ -51,8 +51,8 @@ rails generate scaffold Customer name:string email:string
 end point  
 |  
 controller methods actions  
-|  
-model  
+|       |       |
+|     model------ 
 |  
 view  
 
@@ -149,10 +149,10 @@ b.class -> string
 
 ## Input from User
 In ruby we can take the input from the user by the gets.chomp method
-
+```ruby
 a = gets.chomp  
 puts a  
-
+```
 ## TypeConversion
 a = "10"  
 b = a.to_i  
@@ -168,47 +168,54 @@ b = a.to_i
 ## Loops
 
 ### for
+```ruby
 for i in 1..10  
   puts i  
 end  
-
+```
 ### while
+```ruby
 i = 1  
 while i <= 5  
   puts "hi"  
   i += 1  
 end  
-
+```
 ### loop
+```ruby
 m = 1  
 loop do  
   puts "hello"  
   break if m == 5  
   m += 1  
 end  
-
+```
 ### until
+```ruby
 j = 0  
 until j > 5  
   puts j  
   j = j + 1  
 end  
-
+```
 ### break
+```ruby
 i = 7  
 loop do  
   puts "hello"  
   break if i == 10  
   i += 1  
 end  
-
+```
 ### next
+```ruby
 for k in 1..5  
   next if k % 2 == 0  
   puts k  
 end  
-
+```
 ### redo
+```ruby
 flag = true  
 for x in 2..4  
   puts x  
@@ -217,39 +224,47 @@ for x in 2..4
     redo  
   end  
 end  
-
+```
 ## Array Methods
 
 ### select
+```ruby
 arr = [1,2,3,4,5,6,7]  
 arr2 = arr.select { |i| i % 2 == 0 }  
-
+```
 ### each
+```ruby
 arr2.each do |i|  
   puts i  
 end  
-
+```
 ### reject
+```ruby
 arr.reject { |i| i % 2 == 0 }  
-
-Note: select! modifies original array
+```
+Note:! modifies original array
 
 ### all?
+```ruby
 arr.all? { |n| n >= 5 }  
-
+```
 ### any?
+```ruby
 arr.any? { |n| n >= 5 }  
-
+```
 ### map
+```ruby
 num = [1,2,3,4,5,6]  
 num2 = num.map { |m| m * 2 }  
-
+```
 ### each
+```ruby
 num.each { |i| i * 2 }  
-
+```
 ### collect
+```ruby
 num3 = num.collect { |i| i * 3 }  
-
+```
 ---
 
 # Day7 (Ruby)
@@ -257,13 +272,13 @@ num3 = num.collect { |i| i * 3 }
 ## Inheritance
 - only single level Inheritance is possible in ruby
 - we can represent Inheritance by using < symbol
-
+```bash
 class Base  
 end  
 
 class Child < Base  
 end  
-
+```
 ## super
 super keyword look up to the ancestors for a method until a method found
 
@@ -279,6 +294,7 @@ Kernel
 BasicObject  
 
 ### Example
+```ruby
 class Base  
   def welcome  
     "welcoming you from base class"  
@@ -291,16 +307,18 @@ class Child < Base
     "welocming you from child class"  
   end  
 end  
-
+```
 obj = Child.new  
 puts obj.welcome  
 
 ### ancestors
+```ruby
 Child.ancestors  
-
+```
 ### respond_to?
+```ruby
 obj.respond_to?(:methodname)  
-
+```
 ---
 
 # Day8 (Ruby)
@@ -308,6 +326,7 @@ obj.respond_to?(:methodname)
 ## Conditional Statment
 
 ### if / else
+```ruby
 stock = 20  
 is_available = false  
 
@@ -317,14 +336,18 @@ else
   puts "Item not available"  
 end  
 
-puts is_available  
+puts is_available
+```  
 
 ### Ternary
+```ruby
 is_active = true  
 a = (is_active) ? "present" : "not present"  
 puts a  
+```
 
 ### elsif
+```ruby
 price = 500  
 discount = 0  
 
@@ -343,8 +366,9 @@ else
 end  
 
 puts discount  
-
+```
 ### case
+```ruby
 case  
 when 100..200  
   discount = 10  
@@ -361,15 +385,17 @@ else
 end  
 
 puts discount  
+```
 
 ### unless
+```ruby
 email = true  
-
 unless email  
   puts "email unavailable"  
 else  
   puts "email available"  
 end  
+```
 
 ## Methods
 - public
@@ -390,25 +416,37 @@ Through UI triggered at the time of entering the fields
 Through Model triggered at the time of submitting  
 
 ### Model Validations
+```ruby
 validates :name, format: { with: /\A[a-zA-Z]+\z/, message: "Only letters are allowed" }  
 validates :stock, numericality: { greater_than_or_equal_to: 10 }  
 validates :price, numericality: { greater_than_or_equal_to: 100 }  
 validates :description, length: { maximum: 500 }  
+```
 
 ### Custom Validation
+```ruby
 validate :check_price  
-
 def check_price  
   if stock == 0 && price > 0  
     errors.add "this is not allowed"  
   end  
 end  
-
-## Scope
-- used for repeated query
-- method chaining
+```
 
 ---
 
 # Day10
-Day10 completed
+## Scope
+- used for repeated query
+- method chaining
+
+- ex:-
+```ruby
+  scope :out_of_stock, -> {where("stock <= ?", 0)}
+  scope :test_scope, -> query{} #we can write the raw sql query
+  scope :out_of_stock, -> { where(stock: 0)}
+  scope :whitelisted_products,  -> { where("id IN (?)", [1, 2, 3]) }
+
+  scope :unique_emails, -> {where(email: "124@gmail.com").select(:email).distinct}
+  scope :blacklisted_customers, ->(customer_ids) { where(id: customer_ids) } 
+```
