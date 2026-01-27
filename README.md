@@ -242,8 +242,6 @@ end
 ```ruby
 arr.reject { |i| i % 2 == 0 }  
 ```
-Note:! modifies original array
-
 ### all?
 ```ruby
 arr.all? { |n| n >= 5 }  
@@ -264,6 +262,11 @@ num.each { |i| i * 2 }
 ### collect
 ```ruby
 num3 = num.collect { |i| i * 3 }  
+```
+Note:! modifies original array
+```ruby
+arr.map! {|n| n+=5}
+print arr
 ```
 ---
 
@@ -450,3 +453,73 @@ end
   scope :unique_emails, -> {where(email: "124@gmail.com").select(:email).distinct}
   scope :blacklisted_customers, ->(customer_ids) { where(id: customer_ids) } 
 ```
+
+ # Day12
+
+## Generating controller
+```bash
+rails generate controller admins
+```
+- above command generate following files
+- app\controllers\admins_controller.rb-->controller file
+
+- app\views\admins->views admin file
+
+- app/helpers/admin_helper.rb → helper file
+
+- test/controllers/admin_controller_test.rb → controller test file
+
+# Generating a Model
+```bash
+rails generate model admin
+```
+- Rails creates files related to database and business logic: This comes under Active Record.
+
+- app/models/admin.rb → model file
+- db/migrate/XXXXXXXX_create_admins.rb → migration file
+- test/models/admin_test.rb → model test file
+- test/fixtures/admins.yml → test data
+
+# Deleting view Page
+
+- If we delete the show.html.erb file and access the show page, will get this error:
+```bash
+ActionController::UnknownFormat in CustomersController#show
+CustomersController#show is missing a template for this request format.
+```
+- Reason: if we request show page it will trigger to corresponding UI page(show.html.erb)when it is not found shows above error 
+
+# Removing Controller method
+- If we remove from the controller method (ex:```bash def show end```), there is no error in Rails version 8.
+- Reason:
+1. Rails 8 handles missing actions
+2. If the route or action is not used, it does not crash the app
+# Changes in routes.rb
+```ruby
+1. resources :products, except: [:show,:new]
+2. resources :products, only: [:new, :destroy]
+```
+- if we use except for routes, it will not allow you to request the mentioned routes ,if we try to use them it will throw ```bash routing error```
+
+- if we use only for routes, it will allow you only to request mentioned routes,if we request other routes it will also throw ```bash routing error```
+
+# action components 
+- action components is one of the feature of rails this components will help us in many examples
+
+## Rails Components
+
+| Name              | Feature Area                | Description                                                                 | Introduced |
+|-------------------|-----------------------------|-----------------------------------------------------------------------------|------------|
+| Active Model      | Model functionality         | Adds validations, callbacks, naming, and conversion features to plain Ruby objects | Rails 3.0 |
+| Active Record     | Database interaction (ORM)  | Maps Ruby objects to database tables and provides CRUD operations            | Rails 1.0 |
+| Action View       | View layer                  | Renders HTML using templates such as ERB, HAML, and partials                 | Rails 1.0 |
+| Action Controller | Controller layer            | Processes incoming requests, handles responses, and coordinates models and views | Rails 1.0 |
+| Active Job        | Background processing       | Provides a unified interface for running background jobs with different queue adapters | Rails 4.2 |
+| Active Support    | Core extensions & utilities | Extends Ruby with helpful utility methods and framework support features     | Rails 1.0 |
+| Action Mailer     | Email services              | Enables sending and receiving emails using mailer classes                    | Rails 1.0 |
+| Action Mailbox    | Incoming email processing   | Routes incoming emails to controllers for application-level processing       | Rails 6.0 |
+| Action Cable      | Real-time communication     | Enables WebSocket-based features like live chat and notifications            | Rails 5.0 |
+| Active Storage    | File management             | Handles file uploads, storage, and attachments using cloud or local services | Rails 5.2 |
+| Action Text       | Rich text handling          | Supports rich text content with embedded images using a built-in editor      | Rails 6.0 |
+| Action Dispatch   | Routing & middleware stack  | Manages request routing, sessions, cookies, and middleware integration       | Rails 1.0 |
+

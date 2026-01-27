@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   # resources :products
   # resources :customers
 
-  resources :products do
+  resources :products, except: [:show,:new] do
     collection do
       get 'out_of_stock'
     end
   end
 
-  resources :customers do
+  resources :customers, only: [:new,:edit,:create,:update] do
     collection do
       get 'blacklisted_customers'
     end

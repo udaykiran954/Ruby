@@ -9,11 +9,12 @@ class Product < ApplicationRecord
     validates :description, length: { maximum: 500 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "special characters are not allowed"}
     validates :is_active, acceptance: true
     #validate :check_price
-
+    
     scope :out_of_stock, -> {where("stock <= ?", 0)}
    # scope :test_scope, -> query{} #we can write the raw sql query
    # scope :out_of_stock, -> { where(stock: 0)}
    # scope :whitelisted_products,  -> { where("id IN (?)", [1, 2, 3]) }
+   scope :price_greater,->(price){where("price >= ?",price)}
     def check_price
         if price>0 && !is_active
             errors.add :price ,"when price greater than 0 when isactive is true vice versa"
