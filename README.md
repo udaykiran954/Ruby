@@ -490,7 +490,7 @@ CustomersController#show is missing a template for this request format.
 - Reason: if we request show page it will trigger to corresponding UI page(show.html.erb)when it is not found shows above error 
 
 # Removing Controller method
-- If we remove from the controller method (ex:```bash def show end```), there is no error in Rails version 8.
+- If we remove from the controller method (ex:``` def show end```), there is no error in Rails version 8.
 - Reason:
 1. Rails 8 handles missing actions
 2. If the route or action is not used, it does not crash the app
@@ -499,9 +499,9 @@ CustomersController#show is missing a template for this request format.
 1. resources :products, except: [:show,:new]
 2. resources :products, only: [:new, :destroy]
 ```
-- if we use except for routes, it will not allow you to request the mentioned routes ,if we try to use them it will throw ```bash routing error```
+- if we use except for routes, it will not allow you to request the mentioned routes ,if we try to use them it will throw ``` routing error```
 
-- if we use only for routes, it will allow you only to request mentioned routes,if we request other routes it will also throw ```bash routing error```
+- if we use only for routes, it will allow you only to request mentioned routes,if we request other routes it will also throw ``` routing error```
 
 # action components 
 - action components is one of the feature of rails this components will help us in many examples
