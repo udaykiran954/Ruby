@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    has_rich_text:review
     # @status  = Product.all.limit(10).pluck(:is_active)
     # @price = Product.all.limit(10).pluck(:price) 
     # @stock = Product.all.limit(10).pluck(:stock) 

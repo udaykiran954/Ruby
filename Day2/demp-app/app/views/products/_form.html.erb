@@ -37,6 +37,11 @@
     <%= form.label :is_active, class: "form-check-label" %>
   </div>
 
+   <div class="mb-3">
+    <%= form.label :review, class: "form-label" %>
+    <%= form.rich_text_area :review, class: "form-control", placeholder: "enter review" %>
+  </div>
+
   <div class="text-center">
     <%= form.submit class: "btn btn-primary px-4" %>
   </div>

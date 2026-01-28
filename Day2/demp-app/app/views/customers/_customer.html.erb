@@ -10,6 +10,14 @@
       Email:
       <span class="text-warning"><%= customer.email %></span>
     </h1>
+   <h1 class="card-text fs-5 text-primary">
+  About_Me:
+  <span class="text-warning">
+    <%= customer.about_me.present? ? customer.about_me : "-" %>
+  </span>
+</h1>
+
+
 
   </div>
 </div>

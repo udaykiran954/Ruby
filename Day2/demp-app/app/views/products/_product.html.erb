@@ -3,7 +3,7 @@
   <td><%= product.description %></td>
   <td>₹ <%= product.price %></td>
   <td><%= product.stock %></td>
-   <td>
+  <td>
   <% if product.is_active %>
     <span style="color: green; font-size: 40px;">●</span>
   <% else %>
@@ -13,4 +13,7 @@
   <td>
     <%= link_to "Show", product, class: "btn btn-info btn-sm" %>
   </td>
+   <td> <span class="text-warning">
+    <%= product.review.present? ? product.review : "-" %>
+  </span></td>
 </tr>

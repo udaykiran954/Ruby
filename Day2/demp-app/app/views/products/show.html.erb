@@ -41,6 +41,14 @@
               <% end %>
             </div>
           </div>
+          
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">review:</div>
+            <div class="col-8"><span class="text-warning">
+    <%= @product.review.present? ? @product.review : "-" %>
+  </span></div>
+          </div>
+
 
         </div>
 

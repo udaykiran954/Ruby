@@ -1,6 +1,14 @@
 <p class="text-success text-center"><%= notice %></p>
 <% content_for :title, "Products" %>
-<h1 class="text-center mb-4 text-success">Products</h1>
+<div class="d-flex align-items-center mb-4 position-relative">
+  <h1 class="text-success mx-auto mb-0">Products</h1>
+
+  <%= link_to "Add Product",
+      new_product_path,
+      class: "btn btn-success position-absolute end-0" %>
+</div>
+
+
 <div class="container">
   <table class="table table-bordered table-hover text-center">
     <thead class="table-primary">
@@ -11,6 +19,7 @@
         <th>Stock</th>
         <th>Status</th>
         <th>Action</th>
+        <th>Review</th>
       </tr>
     </thead>
     <tbody>

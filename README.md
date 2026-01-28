@@ -523,3 +523,92 @@ CustomersController#show is missing a template for this request format.
 | Action Text       | Rich text handling          | Supports rich text content with embedded images using a built-in editor      | Rails 6.0 |
 | Action Dispatch   | Routing & middleware stack  | Manages request routing, sessions, cookies, and middleware integration       | Rails 1.0 |
 
+
+# Day13
+## Adding the column to a table in rails application
+```ruby
+rails generate migration AddColumnColnameToTablename colname:datatype
+rails generate migration AddColumnPhone_numberToCustomer phone_number:integer
+rails db:migrate
+```
+- it will add below file to your db/migrate folder when you run above commands 
+1. db/migrate/20260128044536_add_column_phone_to_customer.rb
+
+## installing action-text in our application
+```ruby
+rails action_text:install
+rails db:migrate
+```
+- it will add the below 4 tables in Schema.rb file 
+1. action_text_rich_texts
+2. active_storage_attachments
+3. active_storage_blobs
+4. active_storage_variant_records
+
+- it will add below 2 files in db/migrate folder 
+1. db/migrate/20260128045359_create_active_storage_tables.active_storage.rb
+2. db/migrate/20260128045360_create_action_text_tables.action_text.rb
+
+-it will add below file to app\assets\stylesheets
+1. app\assets\stylesheets\actiontext.css
+
+-it will add below folder to app/views
+1. app/views/active_storage/blobs/_blob.html.erb
+
+- it will add below folder to app/views/layouts
+1. app/views/layouts/action_text/contents/_content.html.erb
+
+- it will add below folder to app/views/test/fixtures
+1. test/fixtures/action_text/rich_texts.yml
+
+- command to check files we are modified in folder
+ ```bash
+ git status
+ ```
+ - command to check files we are modified in particular file
+ ```bash
+ git diff applicationpath
+ ```
+# Task1 
+- After installing the action-text it will modify the schema.rb file by adding 4 tables mentioned above 
+- by defaultly there is a connection between "active_storage_attachments", and "active_storage_blobs"(adds the foreinkey as blob_id in "active_storage_attachments" which refers the id of "active_storage_blobs")
+- by defaultly there is a connection between "active_storage_variant_records", and "active_storage_blobs"(adds the foreinkey as blob_id in "active_storage_variant_records" which refers the id of "active_storage_blobs")
+
+# Task2
+```ruby
+a1 = [1,2,3,4,5,6]
+a2 = [1,3,5]
+a3 = a1 & a2 # it will give all common elements(intersect)
+a4 = a1 || a2 # it will give all elemnts(union)
+print a3 #[1, 3, 5] 
+puts 
+print a4 #[1, 2, 3, 4, 5, 6]
+```
+# Task3
+## params.inspect
+- params.inspect is usually used for debugging—to see what parameters are actually coming from the form/request.
+- This will
+1. Stop execution
+2. Show all permitted params in the error page
+```ruby
+ def create
+    raise customer_params.inspect
+    @customer = Customer.new(customer_params)
+    respond_to do |format|
+      if @customer.save
+        format.html { redirect_to @customer, notice: "Customer was successfully created." }
+        format.json { render :show, status: :created, location: @customer }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+- It giving ``` #<ActionController::Parameters {"name" => "jhon", "email" => "1@gmail.com", "about_me" => "<div>jhon is a english name</div>"} permitted: true> ```
+
+
+
+
+
+

@@ -23,6 +23,11 @@
     <%= form.email_field :email, class: "form-control", placeholder: "Enter email" %>
   </div>
 
+   <div class="mb-3">
+    <%= form.label :about_me, class: "form-label" %>
+    <%= form.rich_text_area :about_me, class: "form-control", placeholder: "enter" %>
+  </div>
+
   <div class="text-center">
     <%= form.submit class: "btn btn-primary px-4" %>
   </div>
