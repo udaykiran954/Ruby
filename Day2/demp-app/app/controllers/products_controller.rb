@@ -68,7 +68,14 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.expect(product: [ :name, :description, :price, :stock, :is_active, :review ])
+      params.expect(product: [  :name,
+      :description,
+      :price,
+      :stock,
+      :is_active,
+      :review,
+      :invoice,
+      product_image: []])
     end
 
     #custom routs

@@ -1,7 +1,10 @@
 class Customer < ApplicationRecord
+  has_one_attached:profile_photo
   has_rich_text:about_me
-   validates :name, format: { with: /\A[a-zA-Z ]+\z/, message: "Only letters are allowed" }
-   # validates :email, presence: true, uniqueness: true  
+  
+   validates :name, format: { with: /\A[a-zA-Z ]+\z/, message: "Only letters are allowed" },presence: true
+    validates :email, presence: true, uniqueness: true  
+   # validates :profile_photo, attached: true, content_type: ['image/png', 'image/jpeg'], size: { less_than: 2.megabytes, message: 'is too large' }
    validate :check_profanity
    scope :unique_emails, -> {where(email: "124@gmail.com").select(:email).distinct}
    scope :blacklisted_customers, ->(customer_ids) { where(id: customer_ids) } 

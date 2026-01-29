@@ -607,6 +607,86 @@ print a4 #[1, 2, 3, 4, 5, 6]
 ```
 - It giving ``` #<ActionController::Parameters {"name" => "jhon", "email" => "1@gmail.com", "about_me" => "<div>jhon is a english name</div>"} permitted: true> ```
 
+## Day14
+# installing acton-storage
+- if we install action_text in our application automatically action_storage will be installed, but you need to install only action-storage you need to run below commands
+
+```ruby
+rails action_storage:install
+rails db:migrate
+```
+- After installing action_Storage to use that we need to follow three steps 
+1. we need to add column using model 
+ex:-
+```ruby
+class Product < ApplicationRecord
+    has_many_attached:product_image
+    has_rich_text:review
+end
+```
+2. Then we need to add it into params in controller class
+```ruby
+class ProductsController < ApplicationController
+ def product_params
+      params.expect(product: [ :name, :description, :price, :stock, :is_active, :review ,product_image:[]])
+    end
+end
+```
+
+3.Then you need make changes in views files
+```html
+   <div class="mb-3">
+    <%= form.label :review, class: "form-label" %>
+    <%= form.rich_text_area :review, class: "form-control", placeholder: "enter review" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :product_image, class: "form-label" %>
+    <%= form.file_field :product_image, class: "form-control", placeholder: "enter",multiple:true %>
+  </div>
+```
+-  Note: action-storage present in from rails 5.2 before and all we used gems to add storage ex:- carrierwave, imageproceesing,paperclip,varience
+
+# Task1
+## Creating column invoice for product model using action-storage
+```ruby
+#product.rb 
+has_one_attached :invoice
+#products_controller.rb
+ def product_params
+      params.expect(product: [  :name,
+      :description,
+      :price,
+      :stock,
+      :is_active,
+      :review,
+      :invoice,
+      product_image: []])
+end
+```
+```html
+ </div>
+    <div class="mb-3">
+    <%= form.label :invoice, class: "form-label" %>
+    <%= form.file_field :invoice, class: "form-control", placeholder: "enter",multiple:true %>
+  </div>
+```
+
+# Task2
+## using migration add date(DOB) -->customer
+```ruby
+PS D:\Ruby Practice\Day2\demp-app> rails generate migration AddColumnDobToCustomer Dob:date
+      invoke  active_record
+      create    db/migrate/20260129095506_add_column_dob_to_customer.rb
+PS D:\Ruby Practice\Day2\demp-app> rails db:migrate
+== 20260129095506 AddColumnDobToCustomer: migrating ===========================
+-- add_column(:customers, :Dob, :date)
+   -> 0.0064s
+== 20260129095506 AddColumnDobToCustomer: migrated (0.0066s) ==================
+
+PS D:\Ruby Practice\Day2\demp-app> 
+```
+
+
 
 
 

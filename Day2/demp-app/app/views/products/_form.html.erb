@@ -41,6 +41,14 @@
     <%= form.label :review, class: "form-label" %>
     <%= form.rich_text_area :review, class: "form-control", placeholder: "enter review" %>
   </div>
+  <div class="mb-3">
+    <%= form.label :product_image, class: "form-label" %>
+    <%= form.file_field :product_image, class: "form-control", placeholder: "enter",multiple:true %>
+  </div>
+    <div class="mb-3">
+    <%= form.label :invoice, class: "form-label" %>
+    <%= form.file_field :invoice, class: "form-control", placeholder: "enter",multiple:true %>
+  </div>
 
   <div class="text-center">
     <%= form.submit class: "btn btn-primary px-4" %>

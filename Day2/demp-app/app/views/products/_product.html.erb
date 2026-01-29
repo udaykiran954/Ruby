@@ -15,5 +15,25 @@
   </td>
    <td> <span class="text-warning">
     <%= product.review.present? ? product.review : "-" %>
-  </span></td>
+  </span>
+  </td>
+  <td>
+            <div>
+              <% if product.product_image.attached? %>
+              <% product.product_image.each do |image|%>
+                <%= image_tag url_for(image),
+                      class: "img-fluid rounded",
+                      style: "max-height: 200px;",size:"100x100",alt: "Product image" %>
+                <%end%>
+              <% else %>
+                <span class="text-muted">No images uploaded</span>
+              <% end %>
+            </div>
+          </div>
+  </td>
+
+    <td> <span class="text-warning">
+    <%= product.invoice.attached? ? product.invoice : "-" %>
+  </span>
+  </td>
 </tr>

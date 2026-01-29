@@ -1,0 +1,39 @@
+- To install rails in our application 
+```ruby
+gem install rails 
+```
+
+- To create database files in rails
+```ruby
+rails db:create
+```
+
+- To open the console in the rails 
+```ruby
+rails console
+```
+
+- To generate scaffold in rails
+```ruby
+rails generate scaffold scaffold_name columname_1:datatype, columname_2:datatype,columnname_3:datatype,....,columnname_n:datatype
+```
+
+- when we create any data in seeds.rb file, To load all data from seeds.rb file to database we need to run the following command
+```ruby
+rails db:seed
+```
+
+- when we use any commands related to database or generate any data related to database then to commit them we use the following command 
+```ruby
+rails db:migrate
+```
+
+- To generate controller in rails 
+
+
+
+
+
+
+
+

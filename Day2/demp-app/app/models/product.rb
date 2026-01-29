@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
-    has_rich_text:review
+   has_many_attached :product_image
+  has_one_attached :invoice
+  has_rich_text :review
     # @status  = Product.all.limit(10).pluck(:is_active)
     # @price = Product.all.limit(10).pluck(:price) 
     # @stock = Product.all.limit(10).pluck(:stock) 
@@ -9,6 +11,7 @@ class Product < ApplicationRecord
     #validates :price, numericality: { greater_than_or_equal_to: 100 }
     validates :description, length: { maximum: 500 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "special characters are not allowed"}
     validates :is_active, acceptance: true
+
     #validate :check_price
     
     scope :out_of_stock, -> {where("stock <= ?", 0)}

@@ -1,6 +1,6 @@
 <div id="<%= dom_id customer %>" class="card shadow-lg p-3 mb-4 text-center">
-  <div class="card-body" >
-    
+  <div class="card-body">
+
     <h1 class="card-title text-primary fs-5">
       Name:
       <span class="text-info"><%= customer.name %></span>
@@ -10,14 +10,41 @@
       Email:
       <span class="text-warning"><%= customer.email %></span>
     </h1>
-   <h1 class="card-text fs-5 text-primary">
-  About_Me:
-  <span class="text-warning">
-    <%= customer.about_me.present? ? customer.about_me : "-" %>
-  </span>
-</h1>
 
+    <h1 class="card-text fs-5 text-primary">
+      Phone Number:
+      <span class="text-warning">
+        <%= customer.phone_number.present? ? customer.phone_number : "-" %>
+      </span>
+    </h1>
 
+    <h1 class="card-text fs-5 text-primary">
+      Date of Birth:
+      <span class="text-warning">
+        <%= customer.Dob.present? ? customer.Dob.strftime("%d %b %Y") : "-" %>
+      </span>
+    </h1>
+
+    <h1 class="card-text fs-5 text-primary">
+      About Me:
+      <span class="text-warning">
+        <%= customer.about_me.present? ? customer.about_me : "-" %>
+      </span>
+    </h1>
+
+    <h1 class="card-text fs-5 text-primary">
+      Profile Photo:
+      <div class="mt-2 d-flex justify-content-center">
+        <% if customer.profile_photo.attached? %>
+          <%= image_tag customer.profile_photo,
+                class: "rounded-circle border shadow-sm",
+                style: "width: 100px; height: 100px; object-fit: cover;",
+                alt: "Profile Picture" %>
+        <% else %>
+          <span class="text-muted">Not uploaded</span>
+        <% end %>
+      </div>
+    </h1>
 
   </div>
 </div>
