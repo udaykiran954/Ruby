@@ -60,6 +60,13 @@ rails generate migration AddColumnColumn_nameToTable Column_name:Datatype
 rails routes
 ```
 
+-To generate mailer
+```ruby
+rails generate mailer Mailername
+rails generate mailer ProductMailer
+```
+
+
 
 
 

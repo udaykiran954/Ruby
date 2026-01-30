@@ -683,8 +683,75 @@ PS D:\Ruby Practice\Day2\demp-app> rails db:migrate
    -> 0.0064s
 == 20260129095506 AddColumnDobToCustomer: migrated (0.0066s) ==================
 
-PS D:\Ruby Practice\Day2\demp-app> 
+PS D:\Ruby Practice\Day2\demp-app>
 ```
+
+## Day15
+# action-mailer
+
+ - This component useful to send the emails ,we don't need to install this component defaultly it will automatically installed when we create a application
+- But To configure this we need to follow some steps
+1. we need to generate a mailer using generate command
+```ruby
+rails generate mailer mailername
+rails generate mailer productmailer
+rails db:migrate
+```
+- it will add some files to the rails application
+```ruby
+demp-app\app\mailers\product_mailer.rb
+demp-app\app\views\product_mailer
+demp-app\test\mailers\previews\product_mailer_preview.rb
+demp-app\test\mailers\product_mailer_test.rb
+```
+2. we need to add a command in application.rb
+```ruby
+require "action_mailer/railtie" #wherever we use action_mailer dependency or feature is been fetched from this 
+```
+3. we need write some configurations in ```demp-app/config/environments/development.rb```
+```ruby
+config.action_mailer.perform_deliveries = true
+config.action_mailer.delivery_method = :letter_opener #generally we can use smpt here but in this application we are using dev tool
+
+```
+4. we need to do some configurations in routes.rb
+```ruby
+if Rails.env.development?
+  mount LetterOpenerWeb::Engine,at: "/letter_opener"
+ end
+```
+
+5. after doing all above steps we need to write the method of creating a mail in our generated mailer in app/mailer folder as shown below
+```ruby
+class ProductMailer < ApplicationMailer
+     def welcome_email
+        @product = params[:product]
+        mail(to:@product.email,subject:"Welcome to rails mailer concept")
+    end
+end
+```
+6. then we need to call the mailer method according to your requirment
+like when you need to send an email (ex:-after creating account) in controller
+```ruby
+def create
+    @product = Product.new(product_params)
+    respond_to do |format|
+      if @product.save
+        ProductMailer.with(product:@product).welcome_email.deliver
+        format.html { redirect_to @product, notice: "Product was successfully created." }
+        format.json { render :show, status: :created, location: @product }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+7.we need to create a corresponding view how it display in
+``` app\views\product_mailer\welcome_email.html.erb ```
+- Note: the method we created in ProductMailer(welocome_email) should be same as our corresponding view folder like welcome_email.html.erb
+
+
 
 
 
