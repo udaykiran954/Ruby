@@ -49,9 +49,13 @@
     <%= form.label :invoice, class: "form-label" %>
     <%= form.file_field :invoice, class: "form-control", placeholder: "enter",multiple:true %>
   </div>
+   </div>
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control", placeholder: "Enter email" %>
+  </div>
 
   <div class="text-center">
     <%= form.submit class: "btn btn-primary px-4" %>
   </div>
-
 <% end %>

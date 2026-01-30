@@ -1,3 +1,2 @@
-class WelcomeCustomer < ApplicationMailer
-    def 
+class WelcomeCustomer < ApplicationMailer 
 end

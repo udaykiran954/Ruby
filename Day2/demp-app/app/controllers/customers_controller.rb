@@ -31,9 +31,11 @@ class CustomersController < ApplicationController
   # POST /customers or /customers.json
   def create
     # raise customer_params.inspect
+
     @customer = Customer.new(customer_params)
     respond_to do |format|
       if @customer.save
+        CustomerMailer.with(customer:@customer).welcome_email.deliver
         format.html { redirect_to @customer, notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else

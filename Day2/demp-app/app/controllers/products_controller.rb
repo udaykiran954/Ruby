@@ -28,6 +28,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        ProductMailer.with(product:@product).welcome_email.deliver
         format.html { redirect_to @product, notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
@@ -75,6 +76,7 @@ class ProductsController < ApplicationController
       :is_active,
       :review,
       :invoice,
+      :email,
       product_image: []])
     end
 
