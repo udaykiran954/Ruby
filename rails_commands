@@ -29,6 +29,39 @@ rails db:migrate
 ```
 
 - To generate controller in rails 
+```ruby
+rails generate controller controller_name
+rails generate controller admin
+```
+
+- To generate model in rails 
+```ruby
+rails generate model model_name
+rails generate model customer
+```
+
+- To install action-text in rails
+```ruby
+rails action-text:install
+```
+
+- To install action-storage in rails
+```ruby
+rails action-storage:install
+```
+
+ - To add a column in table
+ ```ruby
+rails generate migration AddColumnColumn_nameToTable Column_name:Datatype
+```
+
+- To see all the routes in rails
+ ```ruby
+rails routes
+```
+
+
+
 
 
 

@@ -45,37 +45,38 @@
           <!-- Review -->
           <div class="row mb-3">
             <div class="col-4 fw-bold">Review:</div>
-            <div class="col-8">
-              <span class="text-warning">
-                <%= @product.review.present? ? @product.review : "-" %>
-              </span>
+            <div class="col-8 text-warning">
+              <%= @product.review.present? ? @product.review : "-" %>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="row mb-3">
+            <div class="col-4 fw-bold">Email:</div>
+            <div class="col-8 text-warning">
+              <%= @product.email.present? ? @product.email : "-" %>
             </div>
           </div>
 
           <!-- Product Image -->
           <div class="row mb-3">
-            <div class="col-4 fw-bold">Product Image:</div>
-            <div class="col-8">
-              <% if @product.product_image.attached? %>
-              <% @product.product_image.each do |image|%>
-                <%= image_tag url_for(image),
-                      class: "img-fluid rounded",
-                      style: "max-height: 200px;",size:"100x100"alt: "Product image", %>
-                <%end%>
-              <% else %>
-                <span class="text-muted">No images uploaded</span>
-              <% end %>
-            </div>
-          </div>
+  <div class="col-4 fw-bold">Product Image:</div>
+  <div class="col-8">
+    <% if @product.product_image.attached? %>
+      <% @product.product_image.each do |image| %>
+        <%= image_tag image,
+              class: "img-fluid rounded me-2 mb-2",
+              style: "max-height: 150px;",
+              alt: "Product image" %>
+      <% end %>
+    <% else %>
+      <span class="text-muted">No images uploaded</span>
+    <% end %>
+  </div>
+</div>
+
+
         </div>
-         <div class="row mb-3">
-            <div class="col-4 fw-bold">Email:</div>
-            <div class="col-8">
-              <span class="text-warning">
-                <%= @product.review.email? ? @product.email : "-" %>
-              </span>
-            </div>
-          </div>
 
         <div class="card-footer text-center">
           <%= link_to "Edit", edit_product_path(@product), class: "btn btn-warning me-2" %>
