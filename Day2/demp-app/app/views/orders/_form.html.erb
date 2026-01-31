@@ -1,0 +1,27 @@
+<%= form_with(model: order, class: "needs-validation") do |form| %>
+  <% if order.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>
+        <%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:
+      </h5>
+      <ul class="mb-0">
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= form.label :details, class: "form-label" %>
+    <%= form.text_field :details,
+          class: "form-control",
+          placeholder: "Enter details" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :count, class: "form-label" %>
+    <%= form.number_field :count,
+          class: "form-control",
+          placeholder: "Enter count" %>
+  </div>
+  <%= form.submit "Save Order", class: "btn btn-primary" %>
+<% end %>

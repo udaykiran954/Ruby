@@ -1,0 +1,27 @@
+<p class="text-success"><%= notice %></p>
+
+<% content_for :title, "Orders" %>
+
+<h1 class="text-center mb-4 text-primary" style="font-family: Candara;">
+  Orders
+</h1>
+<div class="text-center mt-4">
+  <%= link_to "Add Order", new_order_path, class: "btn btn-success" %>
+</div>
+<div id="orders" class="container">
+  <div class="row">
+    <% @orders.each do |order| %>
+      <div class="col-md-4 mb-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <%= render order %>
+
+            <%= link_to "Show this order", order, class: "btn btn-outline-primary mt-2 w-100" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
