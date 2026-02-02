@@ -689,7 +689,7 @@ PS D:\Ruby Practice\Day2\demp-app>
 ## Day15
 # action-mailer
 
- - This component useful to send the emails ,we don't need to install this component defaultly it will automatically installed when we create a application
+ - This component useful to send the emails or notifications from our application ,we don't need to install this component defaultly it will automatically installed when we create a application,
 - But To configure this we need to follow some steps
 1. we need to generate a mailer using generate command
 ```ruby
@@ -750,6 +750,53 @@ def create
 7.we need to create a corresponding view how it display in
 ``` app\views\product_mailer\welcome_email.html.erb ```
 - Note: the method we created in ProductMailer(welocome_email) should be same as our corresponding view folder like welcome_email.html.erb
+
+cc ,BCC--> from end user respective
+ X-original-TO original email reference
+ In-Reply-To reply email reference
+
+ # Day16
+ ## action_mailer
+ 1. Step1:installing action_mailbox
+ - if we want to use this component you need to explicitly install it by running below command 
+
+
+```ruby
+rails action_mailbox:install
+rails db:migrate
+```
+- this will generate mailboxes folder in app directory
+- after runing above commands some files generated in db/migrate and app
+```ruby 
+1.demp-app\db\migrate\20260202041640_create_action_mailbox_tables.action_mailbox.rb
+2.demp-app\app\mailboxes\application_mailbox.rb
+```
+2. Step2:generating action_mailer
+```ruby
+raills generate action_mailer support
+```
+- after runing above commands it will generate file in app/mailboxes
+ ```ruby
+demp-app\app\mailboxes\support_mailbox.rb 
+ ```
+ - it will generate a file in app/test/mailboxes
+ ```ruby
+demp-app\test\mailboxes\support_mailbox_test.rb
+ ```
+ 3. do some configurations in app/mailboxes/application_mailbox.rb
+ ```ruby
+ class ApplicationMailbox < ActionMailbox::Base
+  # routing /something/i => :somewhere
+  routing all: :support
+ # routing @any_domain
+
+end
+ ```
+ 4. set up the server in config/environments/production.rb
+ ``` ruby 
+ config.action_mailbox.ingress = :any_ingress_server
+ ```
+
 
 
 
