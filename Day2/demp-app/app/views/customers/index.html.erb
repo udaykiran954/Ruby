@@ -10,17 +10,16 @@
 </div>
 <div id="customers" class="container">
   <div class="row">
-    <% @customers.each do |customer| %>
+  <% @customers.each do |customer| %>
       <div class="col-md-4 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <%= render customer %>
-
             <%= link_to "Show this customer", customer, class: "btn btn-outline-primary mt-2 w-100" %>
           </div>
         </div>
       </div>
-    <% end %>
+     <% end %> 
   </div>
 </div>
 

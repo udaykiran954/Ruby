@@ -5,7 +5,10 @@ class CustomersController < ApplicationController
   def index
     list_of_customers = [1,2,3]
     #@customers = Customer.blacklisted_customers(list_of_customers)
-     @customers = Customer.all
+    #@customers = Customer.all
+    # @customers = Customer.all
+    @customers = Customer.all
+    # raise @customers.class.inspect
     # @customers = Customer.unique_emails it will give only emails not a record
   end
 

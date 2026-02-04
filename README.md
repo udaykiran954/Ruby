@@ -796,6 +796,101 @@ end
  ``` ruby 
  config.action_mailbox.ingress = :any_ingress_server
  ```
+String reverse
+String palindrome
+factorial number
+# string methods
+
+1 reverse it will reverse the string
+2. index() it will character in spectified position
+3. downcase it will converts into lowercase
+4. upcase it will converts into upcase
+5. strip it will give remove the spaces first and last
+6. include?"" it will match the passed string if it match gives true otherwise false
+
+# Day 17
+- creating namescopedmodel in Under a Model
+```ruby
+rails generate migration Modelname::NamedscopeModelname
+rails generate migration Product::Category
+rails db:migrate
+```
+- adding a column to namedScopemodel
+```ruby
+rails generate migration AddColumnToModel_Name column:datatype
+rails generate migration AddColumnCategory_nameToProductCategory category_name:string
+```
+## Active_Record Methods
+- Model_name.insert({column:value,column:value,...})
+- Model_name.insert({})
+- Model_name.insert_all([{},{},{},...])
+- Model.find(idname)->it will return if it is present otherwise throw exception
+- Model.find_by(id:idname)-->it will return the the record when it is present otherwise nil
+
+- Model.first
+- Model.second
+- Model.third
+- Model.fourth
+- Model.fifth
+- Model.last
+# Day 18
+1. Core Extensions(Date Calculations methods,Time Calucatons methods,String methods,Object methods)
+2. Instrumentation (pubs)
+3. active support concern
+4. Multibuy transalations(en.yml file used to config the language tranlations)
+# active_support methods (we can use only in rails)
+1. Time.zone.now
+```ruby
+demp-app(dev):001> Time.zone.now
+=> 2026-02-04 05:40:23.064766300 UTC +00:00
+```
+2. n.day,n.hour,n.month,n.week
+```ruby
+demp-app(dev):002> a = Time.zone.now
+=> 2026-02-04 05:42:22.576937800 UTC +00:00
+=> 2026-02-04 05:42:22.576937800 UTC +00:00
+demp-app(dev):003> a
+=> 2026-02-04 05:42:22.576937800 UTC +00:00
+demp-app(dev):003> a
+=> 2026-02-04 05:42:22.576937800 UTC +00:00
+demp-app(dev):004> a + 2.day
+=> 2026-02-06 05:42:22.576937800 UTC +00:00
+demp-app(dev):005> a + 3.week
+=> 2026-02-04 05:42:22.576937800 UTC +00:00
+demp-app(dev):004> a + 2.day
+=> 2026-02-06 05:42:22.576937800 UTC +00:00
+demp-app(dev):005> a + 3.week
+demp-app(dev):004> a + 2.day
+=> 2026-02-06 05:42:22.576937800 UTC +00:00
+demp-app(dev):005> a + 3.week
+=> 2026-02-25 05:42:22.576937800 UTC +00:00
+=> 2026-02-06 05:42:22.576937800 UTC +00:00
+demp-app(dev):005> a + 3.week
+=> 2026-02-25 05:42:22.576937800 UTC +00:00
+=> 2026-02-25 05:42:22.576937800 UTC +00:00
+demp-app(dev):006> a + 3.month
+demp-app(dev):006> a + 3.month
+=> 2026-05-04 05:42:22.576937800 UTC +00:00
+=> 2026-05-04 05:42:22.576937800 UTC +00:00
+demp-app(dev):007> a + 2.days
+demp-app(dev):007> a + 2.days
+=> 2026-02-06 05:42:22.576937800 UTC +00:00
+demp-app(dev):008> a + 2.hour
+=> 2026-02-04 07:42:22.576937800 UTC +00:00
+```
+3. Date
+- Date.today
+- Date.new(year,month,day)
+- Date.today.beginning_of_(day or week or month or year)
+- Date.today.end_of_day(day or month or year or week)
+4. I18n ->this is the class that holds translations
+
+5. String ,array,hash methods
+- " ".blank?, [].blank?, {}.blank? \\true
+- " ".nil?, [].nil?, {}.nil? \\false
+- " ".present?, [].present?, {}.present? \\false
+- " ".empty?, [].empty?, {}.empty? \\true
+
 
 
 
