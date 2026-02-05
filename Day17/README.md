@@ -1,7 +1,7 @@
 
 #  Day 17 – Namespaced Models & Active Record Methods
 
-## 🔹 Creating a Namespaced Model
+##  Creating a Namespaced Model
 
 ```ruby
 rails generate migration Product::Category
@@ -15,7 +15,7 @@ rails db:migrate
 
 ---
 
-## 🔹 Adding Columns to Namespaced Model
+##  Adding Columns to Namespaced Model
 
 ```ruby
 rails generate migration AddCategoryNameToProductCategory category_name:string
@@ -24,7 +24,7 @@ rails db:migrate
 
 ---
 
-## 🔹 Active Record Insert Methods
+##  Active Record Insert Methods
 
 ### Insert (Single Record)
 
@@ -47,7 +47,7 @@ Model.insert_all([
 
 ---
 
-## 🔹 Finding Records
+##  Finding Records
 
 ```ruby
 Model.find(id)        # raises exception if not found
@@ -56,7 +56,7 @@ Model.find_by(id: id) # returns nil if not found
 
 ---
 
-## 🔹 Fetching Records by Position
+##  Fetching Records by Position
 
 ```ruby
 Model.first

@@ -736,7 +736,7 @@ require "action_mailer/railtie"
 
 ---
 
-## 🔹 Step 3: Configure Mailer in Development Environment
+##  Step 3: Configure Mailer in Development Environment
 
  `config/environments/development.rb`
 
@@ -753,7 +753,7 @@ config.action_mailer.delivery_method = :letter_opener
 
 ---
 
-## 🔹 Step 4: Configure Routes for Letter Opener
+##  Step 4: Configure Routes for Letter Opener
 
  `config/routes.rb`
 
@@ -768,7 +768,7 @@ end
 
 ---
 
-## 🔹 Step 5: Define Mailer Method
+##  Step 5: Define Mailer Method
 
  `app/mailers/product_mailer.rb`
 
@@ -786,7 +786,7 @@ end
 
 ---
 
-## 🔹 Step 6: Call Mailer from Controller
+##  Step 6: Call Mailer from Controller
 
 ```ruby
 def create
@@ -808,7 +808,7 @@ end
 
 ---
 
-## 🔹 Step 7: Create Mailer View
+##  Step 7: Create Mailer View
 
  `app/views/product_mailer/welcome_email.html.erb`
 
@@ -816,7 +816,7 @@ end
 
 ---
 
-## 🔹 Email Headers (Additional Info)
+##  Email Headers (Additional Info)
 
 * **CC** → Carbon copy
 * **BCC** → Blind carbon copy
@@ -827,7 +827,7 @@ end
 
 #  Day 16 – Action Mailbox
 
-## 🔹 What is Action Mailbox?
+##  What is Action Mailbox?
 
 **Action Mailbox** allows Rails to **receive and process incoming emails**.
 
@@ -835,7 +835,7 @@ end
 
 ---
 
-## 🔹 Step 1: Install Action Mailbox
+##  Step 1: Install Action Mailbox
 
 ```ruby
 rails action_mailbox:install
@@ -851,7 +851,7 @@ app/mailboxes/application_mailbox.rb
 
 ---
 
-## 🔹 Step 2: Generate a Mailbox
+##  Step 2: Generate a Mailbox
 
 ```ruby
 rails generate mailbox Support
@@ -865,11 +865,11 @@ test/mailboxes/support_mailbox_test.rb
 ```
 
 >  `rails generate action_mailer support` is incorrect
-> ✔ Correct command is `rails generate mailbox Support`
+>  Correct command is `rails generate mailbox Support`
 
 ---
 
-## 🔹 Step 3: Configure Routing
+##  Step 3: Configure Routing
 
  `app/mailboxes/application_mailbox.rb`
 
@@ -883,7 +883,7 @@ end
 
 ---
 
-## 🔹 Step 4: Configure Production Ingress
+##  Step 4: Configure Production Ingress
 
  `config/environments/production.rb`
 
@@ -902,7 +902,7 @@ Ingress examples:
 
 #  Day 17 – Namespaced Models & Active Record Methods
 
-## 🔹 Creating a Namespaced Model
+##  Creating a Namespaced Model
 
 ```ruby
 rails generate migration Product::Category
@@ -916,7 +916,7 @@ rails db:migrate
 
 ---
 
-## 🔹 Adding Columns to Namespaced Model
+##  Adding Columns to Namespaced Model
 
 ```ruby
 rails generate migration AddCategoryNameToProductCategory category_name:string
@@ -925,7 +925,7 @@ rails db:migrate
 
 ---
 
-## 🔹 Active Record Insert Methods
+##  Active Record Insert Methods
 
 ### Insert (Single Record)
 
@@ -948,7 +948,7 @@ Model.insert_all([
 
 ---
 
-## 🔹 Finding Records
+##  Finding Records
 
 ```ruby
 Model.find(id)        # raises exception if not found
@@ -957,7 +957,7 @@ Model.find_by(id: id) # returns nil if not found
 
 ---
 
-## 🔹 Fetching Records by Position
+##  Fetching Records by Position
 
 ```ruby
 Model.first
@@ -972,7 +972,7 @@ Model.last
 
 #  Day 18 – Active Support in Ruby on Rails
 
-## 🔹 What is Active Support?
+##  What is Active Support?
 
 **Active Support** is a Ruby on Rails component that provides **utility classes, extensions, and helpers** to make Ruby and Rails development easier and more expressive.
 
@@ -980,7 +980,7 @@ Model.last
 
 ---
 
-## 🔹 Main Components of Active Support
+##  Main Components of Active Support
 
 ### 1️ Core Extensions
 
@@ -1029,7 +1029,7 @@ config/locales/en.yml
 
 ---
 
-## 🔹 Active Support Time & Date Methods
+##  Active Support Time & Date Methods
 
 *(Available only in Rails)*
 
@@ -1044,7 +1044,7 @@ Time.zone.now
 # => 2026-02-04 05:40:23 UTC
 ```
 
-> ✔ Preferred over `Time.now` in Rails applications
+>  Preferred over `Time.now` in Rails applications
 
 ---
 
@@ -1082,12 +1082,12 @@ a + 2.hours
 * `months`
 * `years`
 
-> 📝 **Correction:**
+>  **Correction:**
 > `n.day` and `n.days` both work, but **plural form is preferred** for readability.
 
 ---
 
-## 3️⃣ Date Methods (Active Support Extensions)
+## 3️ Date Methods (Active Support Extensions)
 
 ### Common Date Helpers
 
@@ -1122,7 +1122,7 @@ Date.today.end_of_year
 
 ---
 
-## 4️⃣ I18n (Internationalization)
+## 4️ I18n (Internationalization)
 
 `I18n` is the class responsible for handling translations.
 
@@ -1141,7 +1141,7 @@ en:
 
 ---
 
-## 5️⃣ String, Array, Hash Helper Methods
+## 5️ String, Array, Hash Helper Methods
 
 Active Support adds helpful predicate methods.
 
@@ -1192,7 +1192,7 @@ nil.nil?   # true
 
 ---
 
-## 🔹 N+1 Query Problem
+##  N+1 Query Problem
 
 ### What is the N+1 Query Problem?
 
@@ -1245,25 +1245,25 @@ A **User** can have:
 
 ---
 
-## 🔹 Types of Associations (Conceptual Level)
+##  Types of Associations (Conceptual Level)
 
 There are **4 logical types** of relationships between database tables:
 
-### 1️⃣ One-to-One
+### 1️ One-to-One
 
 * One record in table A is linked to **one record** in table B
 * **Example:** `User → Profile`
 
 ---
 
-### 2️⃣ One-to-Many
+### 2️ One-to-Many
 
 * One record in table A is linked to **many records** in table B
 * **Example:** `User → Posts`
 
 ---
 
-### 3️⃣ Many-to-One
+### 3️ Many-to-One
 
 * Many records in table A belong to **one record** in table B
 * **Example:** `Posts → User`
@@ -1272,14 +1272,14 @@ There are **4 logical types** of relationships between database tables:
 
 ---
 
-### 4️⃣ Many-to-Many
+### 4️ Many-to-Many
 
 * Many records in table A are linked to many records in table B
 * **Example:** `Students ↔ Courses`
 
 ---
 
-## 🔹 Ways to Define Associations in Rails
+##  Ways to Define Associations in Rails
 
 Rails provides **6 association macros**:
 
@@ -1292,7 +1292,7 @@ Rails provides **6 association macros**:
 
 ---
 
-## 🔹 Polymorphic Association
+##  Polymorphic Association
 
 ### What is a Polymorphic Association?
 
@@ -1321,9 +1321,9 @@ Active Storage uses polymorphic associations:
 
 ---
 
-## 🔹 Creating Associations Using Generate Commands (New Tables)
+##  Creating Associations Using Generate Commands (New Tables)
 
-### Step 1️⃣ Create Parent Model
+### Step 1️ Create Parent Model
 
 ```ruby
 rails generate model User name:string email:string
@@ -1332,7 +1332,7 @@ rails db:migrate
 
 ---
 
-### Step 2️⃣ Create Child Model with Reference
+### Step 2️ Create Child Model with Reference
 
 ```ruby
 rails generate model Vendor name:string location:string user:references
@@ -1347,7 +1347,7 @@ rails db:migrate
 
 ---
 
-## 🔹 SQL-Level Associations (Database Side)
+##  SQL-Level Associations (Database Side)
 
 After running migrations, Rails generates SQL relations.
 
@@ -1392,12 +1392,12 @@ end
 
 If you try to delete the **parent table (`users`) before the child table (`vendors`)**, you will get a **foreign key constraint error**.
 
-✔ Always delete **child tables first**, then parent tables
-✔ Or use `dependent: :destroy` in Rails models
+ Always delete **child tables first**, then parent tables
+ Or use `dependent: :destroy` in Rails models
 
 ---
 
-## 🔹 Rails-Level Associations (Model Side)
+##  Rails-Level Associations (Model Side)
 
 After database setup, we must define associations **inside models** so Rails understands the relationship.
 
@@ -1437,7 +1437,7 @@ end
 
 ---
 
-## 🔹 How Rails Associations Help
+##  How Rails Associations Help
 
 With proper associations, Rails provides:
 
@@ -1457,7 +1457,7 @@ vendor.user
 
 ---
 
-## 🔹 Creating Associations for an Existing Table
+##  Creating Associations for an Existing Table
 
 ### Generate Migration to Add Foreign Key
 
@@ -1484,7 +1484,7 @@ end
 
 ---
 
-## 🔹 Rails-Level Association for Existing Tables
+##  Rails-Level Association for Existing Tables
 
 ### Product Model
 
@@ -1509,7 +1509,7 @@ end
 
 ---
 
-## 🔹 Useful Rails Association Methods
+##  Useful Rails Association Methods
 
 ```ruby
 User.create
@@ -1524,6 +1524,90 @@ User.last.vendor.create
 
   * Automatically sets `user_id`
   * Creates a vendor linked to `User.last`
+
+#  Foreign Key Constraints in Rails (PostgreSQL)
+
+This document explains **common foreign key errors** you may encounter in a Rails application and why they occur.
+
+---
+
+##  1. Dropping a Parent Table Before Child Table
+
+###  Scenario
+
+You attempt to drop a **parent table** while a **child table** still references it via a foreign key.
+
+###  Command Example
+
+```sql
+DROP TABLE test1s;
+```
+
+###  Error
+
+```
+ERROR: cannot drop table test1s because other objects depend on it
+DETAIL: constraint fk_rails_7b772ba554 on table test2s depends on table test1s
+HINT: Use DROP ... CASCADE to drop the dependent objects too.
+```
+
+###  Explanation
+
+* `test2s` has a **foreign key** (`test1_id`) referencing `test1s`
+* PostgreSQL **prevents deleting the parent table** to maintain referential integrity
+
+###  Correct Approaches
+
+#### Option 1: Drop child table first
+
+```bash
+rails generate migration DropTest2s
+rails db:migrate
+```
+
+#### Option 2: Use CASCADE (Not recommended in Rails)
+
+```sql
+DROP TABLE test1s CASCADE;
+```
+
+ This will also delete dependent constraints and objects.
+
+---
+
+##  2. Inserting an Invalid Foreign Key into Child Table
+
+###  Scenario
+
+You insert a foreign key value into a child table that **does not exist in the parent table**.
+
+###  Command Example
+
+```ruby
+Test2.insert({ name: "uday", test1_id: 8 })
+```
+
+###  Error
+
+```
+PG::ForeignKeyViolation: ERROR: insert or update on table "test2s"
+violates foreign key constraint "fk_rails_7b772ba554"
+DETAIL: Key (test1_id)=(8) is not present in table "test1s".
+```
+
+###  Explanation
+
+* `test1_id = 8` does **not exist** in `test1s`
+* PostgreSQL blocks the insert to **protect data integrity**
+
+###  Correct Solution
+
+Ensure the parent record exists before inserting:
+
+```ruby
+Test1.create(id: 8, name: "parent_record")
+Test2.create(name: "uday", test1_id: 8)
+```
 
 ---
 

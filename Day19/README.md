@@ -17,37 +17,37 @@ A **User** can have:
 
 There are **4 logical types** of relationships between database tables:
 
-### 1️⃣ One-to-One
+### 1️ One-to-One
 
 * One record in table A is linked to **one record** in table B
 * **Example:** `User → Profile`
 
 ---
 
-### 2️⃣ One-to-Many
+### 2️ One-to-Many
 
 * One record in table A is linked to **many records** in table B
 * **Example:** `User → Posts`
 
 ---
 
-### 3️⃣ Many-to-One
+### 3️ Many-to-One
 
 * Many records in table A belong to **one record** in table B
 * **Example:** `Posts → User`
 
-> 🔹 *This is the reverse of one-to-many and is implemented using `belongs_to`.*
+>  *This is the reverse of one-to-many and is implemented using `belongs_to`.*
 
 ---
 
-### 4️⃣ Many-to-Many
+### 4️ Many-to-Many
 
 * Many records in table A are linked to many records in table B
 * **Example:** `Students ↔ Courses`
 
 ---
 
-## 🔹 Ways to Define Associations in Rails
+##  Ways to Define Associations in Rails
 
 Rails provides **6 association macros**:
 
@@ -60,7 +60,7 @@ Rails provides **6 association macros**:
 
 ---
 
-## 🔹 Polymorphic Association
+##  Polymorphic Association
 
 ### What is a Polymorphic Association?
 
@@ -89,9 +89,9 @@ Active Storage uses polymorphic associations:
 
 ---
 
-## 🔹 Creating Associations Using Generate Commands (New Tables)
+##  Creating Associations Using Generate Commands (New Tables)
 
-### Step 1️⃣ Create Parent Model
+### Step 1️ Create Parent Model
 
 ```ruby
 rails generate model User name:string email:string
@@ -100,7 +100,7 @@ rails db:migrate
 
 ---
 
-### Step 2️⃣ Create Child Model with Reference
+### Step 2️ Create Child Model with Reference
 
 ```ruby
 rails generate model Vendor name:string location:string user:references
@@ -115,7 +115,7 @@ rails db:migrate
 
 ---
 
-## 🔹 SQL-Level Associations (Database Side)
+##  SQL-Level Associations (Database Side)
 
 After running migrations, Rails generates SQL relations.
 
@@ -165,7 +165,7 @@ If you try to delete the **parent table (`users`) before the child table (`vendo
 
 ---
 
-## 🔹 Rails-Level Associations (Model Side)
+##  Rails-Level Associations (Model Side)
 
 After database setup, we must define associations **inside models** so Rails understands the relationship.
 
@@ -205,7 +205,7 @@ end
 
 ---
 
-## 🔹 How Rails Associations Help
+##  How Rails Associations Help
 
 With proper associations, Rails provides:
 
@@ -225,7 +225,7 @@ vendor.user
 
 ---
 
-## 🔹 Creating Associations for an Existing Table
+##  Creating Associations for an Existing Table
 
 ### Generate Migration to Add Foreign Key
 
@@ -252,7 +252,7 @@ end
 
 ---
 
-## 🔹 Rails-Level Association for Existing Tables
+##  Rails-Level Association for Existing Tables
 
 ### Product Model
 
@@ -277,7 +277,7 @@ end
 
 ---
 
-## 🔹 Useful Rails Association Methods
+##  Useful Rails Association Methods
 
 ```ruby
 User.create

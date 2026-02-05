@@ -1,6 +1,6 @@
 #  Day 16 – Action Mailbox
 
-## 🔹 What is Action Mailbox?
+##  What is Action Mailbox?
 
 **Action Mailbox** allows Rails to **receive and process incoming emails**.
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 🔹 Step 1: Install Action Mailbox
+##  Step 1: Install Action Mailbox
 
 ```ruby
 rails action_mailbox:install
@@ -24,7 +24,7 @@ app/mailboxes/application_mailbox.rb
 
 ---
 
-## 🔹 Step 2: Generate a Mailbox
+##  Step 2: Generate a Mailbox
 
 ```ruby
 rails generate mailbox Support
@@ -38,11 +38,11 @@ test/mailboxes/support_mailbox_test.rb
 ```
 
 >  `rails generate action_mailer support` is incorrect
-> ✔ Correct command is `rails generate mailbox Support`
+>  Correct command is `rails generate mailbox Support`
 
 ---
 
-## 🔹 Step 3: Configure Routing
+##  Step 3: Configure Routing
 
  `app/mailboxes/application_mailbox.rb`
 
@@ -56,7 +56,7 @@ end
 
 ---
 
-## 🔹 Step 4: Configure Production Ingress
+##  Step 4: Configure Production Ingress
 
  `config/environments/production.rb`
 

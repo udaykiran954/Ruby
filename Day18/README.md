@@ -1,6 +1,6 @@
 #  Day 18 – Active Support in Ruby on Rails
 
-## 🔹 What is Active Support?
+##  What is Active Support?
 
 **Active Support** is a Ruby on Rails component that provides **utility classes, extensions, and helpers** to make Ruby and Rails development easier and more expressive.
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 🔹 Main Components of Active Support
+##  Main Components of Active Support
 
 ### 1️ Core Extensions
 
@@ -57,7 +57,7 @@ config/locales/en.yml
 
 ---
 
-## 🔹 Active Support Time & Date Methods
+##  Active Support Time & Date Methods
 
 *(Available only in Rails)*
 
@@ -110,12 +110,12 @@ a + 2.hours
 * `months`
 * `years`
 
-> 📝 **Correction:**
+>  **Correction:**
 > `n.day` and `n.days` both work, but **plural form is preferred** for readability.
 
 ---
 
-## 3️⃣ Date Methods (Active Support Extensions)
+## 3️ Date Methods (Active Support Extensions)
 
 ### Common Date Helpers
 
@@ -150,7 +150,7 @@ Date.today.end_of_year
 
 ---
 
-## 4️⃣ I18n (Internationalization)
+## 4️ I18n (Internationalization)
 
 `I18n` is the class responsible for handling translations.
 
@@ -169,7 +169,7 @@ en:
 
 ---
 
-## 5️⃣ String, Array, Hash Helper Methods
+## 5️ String, Array, Hash Helper Methods
 
 Active Support adds helpful predicate methods.
 
@@ -220,7 +220,7 @@ nil.nil?   # true
 
 ---
 
-## 🔹 N+1 Query Problem
+##  N+1 Query Problem
 
 ### What is the N+1 Query Problem?
 
