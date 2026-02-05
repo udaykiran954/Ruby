@@ -2,6 +2,7 @@ class Product < ApplicationRecord
    has_many_attached :product_image
   has_one_attached :invoice
   has_rich_text :review
+  has_many :orders
     # @status  = Product.all.limit(10).pluck(:is_active)
     # @price = Product.all.limit(10).pluck(:price) 
     # @stock = Product.all.limit(10).pluck(:stock) 

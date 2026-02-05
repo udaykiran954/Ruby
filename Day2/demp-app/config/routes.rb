@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :product do
+    resources :categories
+  end
+
   resources :customers do
     collection do
       get 'blacklisted_customers'

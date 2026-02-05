@@ -61,13 +61,20 @@ rails generate migration AddColumnColumn_nameToTable Column_name:Datatype
 rails routes
 ```
 
--To generate mailer
+- To generate mailer
 ```ruby
 rails generate mailer Mailername
 rails generate mailer ProductMailer
 ```
-
-
+- To rollback the db
+```
+rails db:rollback
+```
+- To create a model with associations
+``` ruby
+rails generate model modelname column1:datatype,column2:datatype tablename:references
+```
+- To create comntr
 
 
 

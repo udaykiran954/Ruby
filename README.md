@@ -686,215 +686,846 @@ PS D:\Ruby Practice\Day2\demp-app> rails db:migrate
 PS D:\Ruby Practice\Day2\demp-app>
 ```
 
-## Day15
-# action-mailer
+---
 
- - This component useful to send the emails or notifications from our application ,we don't need to install this component defaultly it will automatically installed when we create a application,
-- But To configure this we need to follow some steps
-1. we need to generate a mailer using generate command
+#  Day 15 – Action Mailer
+
+## 🔹 What is Action Mailer?
+
+**Action Mailer** is a Rails component used to **send emails or notifications** from a Rails application.
+
+* It is **installed by default** when a Rails application is created
+* No separate installation is required
+* Used for:
+
+  * Welcome emails
+  * Account verification
+  * Password reset
+  * Notifications
+
+---
+
+## 🔹 Step 1: Generate a Mailer
+
 ```ruby
-rails generate mailer mailername
-rails generate mailer productmailer
-rails db:migrate
+rails generate mailer ProductMailer
 ```
-- it will add some files to the rails application
+
+>  `rails db:migrate` is **not required** here because mailers do not create database tables.
+
+### Files Generated
+
+```
+app/mailers/product_mailer.rb
+app/views/product_mailer/
+test/mailers/product_mailer_test.rb
+test/mailers/previews/product_mailer_preview.rb
+```
+
+---
+
+## 🔹 Step 2: Enable Action Mailer (Optional Clarification)
+
+In modern Rails versions, **this line already exists**:
+
 ```ruby
-demp-app\app\mailers\product_mailer.rb
-demp-app\app\views\product_mailer
-demp-app\test\mailers\previews\product_mailer_preview.rb
-demp-app\test\mailers\product_mailer_test.rb
+require "action_mailer/railtie"
 ```
-2. we need to add a command in application.rb
-```ruby
-require "action_mailer/railtie" #wherever we use action_mailer dependency or feature is been fetched from this 
-```
-3. we need write some configurations in ```demp-app/config/environments/development.rb```
+
+ You **do not need to add it manually** unless it was removed.
+
+---
+
+## 🔹 Step 3: Configure Mailer in Development Environment
+
+ `config/environments/development.rb`
+
 ```ruby
 config.action_mailer.perform_deliveries = true
-config.action_mailer.delivery_method = :letter_opener #generally we can use smpt here but in this application we are using dev tool
-
+config.action_mailer.delivery_method = :letter_opener
 ```
-4. we need to do some configurations in routes.rb
+
+### Explanation
+
+* `perform_deliveries = true` → allows emails to be sent
+* `letter_opener` → opens emails in browser (development only)
+* In production, SMTP is used instead
+
+---
+
+## 🔹 Step 4: Configure Routes for Letter Opener
+
+ `config/routes.rb`
+
 ```ruby
 if Rails.env.development?
-  mount LetterOpenerWeb::Engine,at: "/letter_opener"
- end
-```
-
-5. after doing all above steps we need to write the method of creating a mail in our generated mailer in app/mailer folder as shown below
-```ruby
-class ProductMailer < ApplicationMailer
-     def welcome_email
-        @product = params[:product]
-        mail(to:@product.email,subject:"Welcome to rails mailer concept")
-    end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end
 ```
-6. then we need to call the mailer method according to your requirment
-like when you need to send an email (ex:-after creating account) in controller
+
+ View emails at:
+`http://localhost:3000/letter_opener`
+
+---
+
+## 🔹 Step 5: Define Mailer Method
+
+ `app/mailers/product_mailer.rb`
+
+```ruby
+class ProductMailer < ApplicationMailer
+  def welcome_email
+    @product = params[:product]
+    mail(
+      to: @product.email,
+      subject: "Welcome to Rails Mailer Concept"
+    )
+  end
+end
+```
+
+---
+
+## 🔹 Step 6: Call Mailer from Controller
+
 ```ruby
 def create
-    @product = Product.new(product_params)
-    respond_to do |format|
-      if @product.save
-        ProductMailer.with(product:@product).welcome_email.deliver
-        format.html { redirect_to @product, notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+  @product = Product.new(product_params)
+
+  if @product.save
+    ProductMailer.with(product: @product).welcome_email.deliver_now
+    redirect_to @product, notice: "Product was successfully created."
+  else
+    render :new, status: :unprocessable_entity
   end
+end
 ```
-7.we need to create a corresponding view how it display in
-``` app\views\product_mailer\welcome_email.html.erb ```
-- Note: the method we created in ProductMailer(welocome_email) should be same as our corresponding view folder like welcome_email.html.erb
 
-cc ,BCC--> from end user respective
- X-original-TO original email reference
- In-Reply-To reply email reference
+### Delivery Methods
 
- # Day16
- ## action_mailer
- 1. Step1:installing action_mailbox
- - if we want to use this component you need to explicitly install it by running below command 
+* `deliver_now` → synchronous
+* `deliver_later` → background job (recommended in production)
 
+---
+
+## 🔹 Step 7: Create Mailer View
+
+ `app/views/product_mailer/welcome_email.html.erb`
+
+>  The view filename **must match** the mailer method name.
+
+---
+
+## 🔹 Email Headers (Additional Info)
+
+* **CC** → Carbon copy
+* **BCC** → Blind carbon copy
+* **In-Reply-To** → Email reply reference
+* **X-Original-To** → Original recipient address
+
+---
+
+#  Day 16 – Action Mailbox
+
+## 🔹 What is Action Mailbox?
+
+**Action Mailbox** allows Rails to **receive and process incoming emails**.
+
+ Unlike Action Mailer, it must be **explicitly installed**.
+
+---
+
+## 🔹 Step 1: Install Action Mailbox
 
 ```ruby
 rails action_mailbox:install
 rails db:migrate
 ```
-- this will generate mailboxes folder in app directory
-- after runing above commands some files generated in db/migrate and app
-```ruby 
-1.demp-app\db\migrate\20260202041640_create_action_mailbox_tables.action_mailbox.rb
-2.demp-app\app\mailboxes\application_mailbox.rb
+
+### Files Generated
+
 ```
-2. Step2:generating action_mailer
+db/migrate/*_create_action_mailbox_tables.rb
+app/mailboxes/application_mailbox.rb
+```
+
+---
+
+## 🔹 Step 2: Generate a Mailbox
+
 ```ruby
-raills generate action_mailer support
+rails generate mailbox Support
 ```
-- after runing above commands it will generate file in app/mailboxes
- ```ruby
-demp-app\app\mailboxes\support_mailbox.rb 
- ```
- - it will generate a file in app/test/mailboxes
- ```ruby
-demp-app\test\mailboxes\support_mailbox_test.rb
- ```
- 3. do some configurations in app/mailboxes/application_mailbox.rb
- ```ruby
- class ApplicationMailbox < ActionMailbox::Base
-  # routing /something/i => :somewhere
+
+### Files Generated
+
+```
+app/mailboxes/support_mailbox.rb
+test/mailboxes/support_mailbox_test.rb
+```
+
+>  `rails generate action_mailer support` is incorrect
+> ✔ Correct command is `rails generate mailbox Support`
+
+---
+
+## 🔹 Step 3: Configure Routing
+
+ `app/mailboxes/application_mailbox.rb`
+
+```ruby
+class ApplicationMailbox < ActionMailbox::Base
   routing all: :support
- # routing @any_domain
-
 end
- ```
- 4. set up the server in config/environments/production.rb
- ``` ruby 
- config.action_mailbox.ingress = :any_ingress_server
- ```
-String reverse
-String palindrome
-factorial number
-# string methods
+```
 
-1 reverse it will reverse the string
-2. index() it will character in spectified position
-3. downcase it will converts into lowercase
-4. upcase it will converts into upcase
-5. strip it will give remove the spaces first and last
-6. include?"" it will match the passed string if it match gives true otherwise false
+ All incoming emails go to `SupportMailbox`
 
-# Day 17
-- creating namescopedmodel in Under a Model
+---
+
+## 🔹 Step 4: Configure Production Ingress
+
+ `config/environments/production.rb`
+
 ```ruby
-rails generate migration Modelname::NamedscopeModelname
+config.action_mailbox.ingress = :any_ingress_server
+```
+
+Ingress examples:
+
+* `:relay`
+* `:postmark`
+* `:sendgrid`
+* `:mailgun`
+
+---
+
+#  Day 17 – Namespaced Models & Active Record Methods
+
+## 🔹 Creating a Namespaced Model
+
+```ruby
 rails generate migration Product::Category
 rails db:migrate
 ```
-- adding a column to namedScopemodel
+
+### Result
+
+* Creates a `categories` table
+* Model path: `Product::Category`
+
+---
+
+## 🔹 Adding Columns to Namespaced Model
+
 ```ruby
-rails generate migration AddColumnToModel_Name column:datatype
-rails generate migration AddColumnCategory_nameToProductCategory category_name:string
+rails generate migration AddCategoryNameToProductCategory category_name:string
+rails db:migrate
 ```
-## Active_Record Methods
-- Model_name.insert({column:value,column:value,...})
-- Model_name.insert({})
-- Model_name.insert_all([{},{},{},...])
-- Model.find(idname)->it will return if it is present otherwise throw exception
-- Model.find_by(id:idname)-->it will return the the record when it is present otherwise nil
 
-- Model.first
-- Model.second
-- Model.third
-- Model.fourth
-- Model.fifth
-- Model.last
-# Day 18
-1. Core Extensions(Date Calculations methods,Time Calucatons methods,String methods,Object methods)
-2. Instrumentation (pubs)
-3. active support concern
-4. Multibuy transalations(en.yml file used to config the language tranlations)
-# active_support methods (we can use only in rails)
-1. Time.zone.now
+---
+
+## 🔹 Active Record Insert Methods
+
+### Insert (Single Record)
+
 ```ruby
-demp-app(dev):001> Time.zone.now
-=> 2026-02-04 05:40:23.064766300 UTC +00:00
+Model.insert({ column: value })
 ```
-2. n.day,n.hour,n.month,n.week
+
+>  Skips validations & callbacks
+
+---
+
+### Insert Multiple Records
+
 ```ruby
-demp-app(dev):002> a = Time.zone.now
-=> 2026-02-04 05:42:22.576937800 UTC +00:00
-=> 2026-02-04 05:42:22.576937800 UTC +00:00
-demp-app(dev):003> a
-=> 2026-02-04 05:42:22.576937800 UTC +00:00
-demp-app(dev):003> a
-=> 2026-02-04 05:42:22.576937800 UTC +00:00
-demp-app(dev):004> a + 2.day
-=> 2026-02-06 05:42:22.576937800 UTC +00:00
-demp-app(dev):005> a + 3.week
-=> 2026-02-04 05:42:22.576937800 UTC +00:00
-demp-app(dev):004> a + 2.day
-=> 2026-02-06 05:42:22.576937800 UTC +00:00
-demp-app(dev):005> a + 3.week
-demp-app(dev):004> a + 2.day
-=> 2026-02-06 05:42:22.576937800 UTC +00:00
-demp-app(dev):005> a + 3.week
-=> 2026-02-25 05:42:22.576937800 UTC +00:00
-=> 2026-02-06 05:42:22.576937800 UTC +00:00
-demp-app(dev):005> a + 3.week
-=> 2026-02-25 05:42:22.576937800 UTC +00:00
-=> 2026-02-25 05:42:22.576937800 UTC +00:00
-demp-app(dev):006> a + 3.month
-demp-app(dev):006> a + 3.month
-=> 2026-05-04 05:42:22.576937800 UTC +00:00
-=> 2026-05-04 05:42:22.576937800 UTC +00:00
-demp-app(dev):007> a + 2.days
-demp-app(dev):007> a + 2.days
-=> 2026-02-06 05:42:22.576937800 UTC +00:00
-demp-app(dev):008> a + 2.hour
-=> 2026-02-04 07:42:22.576937800 UTC +00:00
+Model.insert_all([
+  { column: value },
+  { column: value }
+])
 ```
-3. Date
-- Date.today
-- Date.new(year,month,day)
-- Date.today.beginning_of_(day or week or month or year)
-- Date.today.end_of_day(day or month or year or week)
-4. I18n ->this is the class that holds translations
 
-5. String ,array,hash methods
-- " ".blank?, [].blank?, {}.blank? \\true
-- " ".nil?, [].nil?, {}.nil? \\false
-- " ".present?, [].present?, {}.present? \\false
-- " ".empty?, [].empty?, {}.empty? \\true
+---
+
+## 🔹 Finding Records
+
+```ruby
+Model.find(id)        # raises exception if not found
+Model.find_by(id: id) # returns nil if not found
+```
+
+---
+
+## 🔹 Fetching Records by Position
+
+```ruby
+Model.first
+Model.second
+Model.third
+Model.fourth
+Model.fifth
+Model.last
+```
+
+---
+
+#  Day 18 – Active Support in Ruby on Rails
+
+## 🔹 What is Active Support?
+
+**Active Support** is a Ruby on Rails component that provides **utility classes, extensions, and helpers** to make Ruby and Rails development easier and more expressive.
+
+ These features are **available only inside Rails**, not in plain Ruby.
+
+---
+
+## 🔹 Main Components of Active Support
+
+### 1️ Core Extensions
+
+Active Support extends core Ruby classes such as:
+
+* **Date** (date calculations)
+* **Time** (time calculations)
+* **String**
+* **Array**
+* **Hash**
+* **Object**
+
+These extensions add many helper methods that do **not exist in pure Ruby**.
+
+---
+
+### 2️ Instrumentation (Publish / Subscribe)
+
+Active Support provides an **event notification system** using:
+
+```ruby
+ActiveSupport::Notifications
+```
+
+* Used internally by Rails (e.g., SQL queries, controller actions)
+* Helps in **logging, monitoring, and performance analysis**
+
+---
+
+###  ActiveSupport::Concern
+
+* Used to share **common logic** between models/controllers
+* Helps organize modules cleanly
+* Avoids messy `included do` blocks
+
+---
+
+### 4️ Multi-language Translations (I18n)
+
+* Rails uses **I18n (Internationalization)** for translations
+* Translations are configured using YAML files like:
+
+```yaml
+config/locales/en.yml
+```
+
+---
+
+## 🔹 Active Support Time & Date Methods
+
+*(Available only in Rails)*
+
+---
+
+## 1️ Time.zone.now
+
+Returns the **current time based on the Rails application time zone**.
+
+```ruby
+Time.zone.now
+# => 2026-02-04 05:40:23 UTC
+```
+
+> ✔ Preferred over `Time.now` in Rails applications
+
+---
+
+## 2️ Time Calculations (`n.day`, `n.week`, etc.)
+
+Active Support adds **human-readable time helpers**.
+
+```ruby
+a = Time.zone.now
+```
+
+### Examples
+
+```ruby
+a + 2.days
+# => Adds 2 days
+
+a + 3.weeks
+# => Adds 3 weeks
+
+a + 3.months
+# => Adds 3 months
+
+a + 2.hours
+# => Adds 2 hours
+```
+
+### Supported Units
+
+* `seconds`
+* `minutes`
+* `hours`
+* `days`
+* `weeks`
+* `months`
+* `years`
+
+> 📝 **Correction:**
+> `n.day` and `n.days` both work, but **plural form is preferred** for readability.
+
+---
+
+## 3️⃣ Date Methods (Active Support Extensions)
+
+### Common Date Helpers
+
+```ruby
+Date.today
+Date.new(year, month, day)
+```
+
+---
+
+### Beginning Helpers
+
+```ruby
+Date.today.beginning_of_day
+Date.today.beginning_of_week
+Date.today.beginning_of_month
+Date.today.beginning_of_year
+```
+
+---
+
+### End Helpers
+
+```ruby
+Date.today.end_of_day
+Date.today.end_of_week
+Date.today.end_of_month
+Date.today.end_of_year
+```
+
+> These helpers **do not exist in pure Ruby**, only in Rails.
+
+---
+
+## 4️⃣ I18n (Internationalization)
+
+`I18n` is the class responsible for handling translations.
+
+### Example
+
+```ruby
+I18n.t('hello')
+```
+
+### Translation File (`en.yml`)
+
+```yaml
+en:
+  hello: "Hello World"
+```
+
+---
+
+## 5️⃣ String, Array, Hash Helper Methods
+
+Active Support adds helpful predicate methods.
+
+### blank?
+
+```ruby
+" ".blank?   # true
+[].blank?    # true
+{}.blank?    # true
+nil.blank?   # true
+```
+
+---
+
+### nil?
+
+```ruby
+" ".nil?   # false
+[].nil?    # false
+{}.nil?    # false
+nil.nil?   # true
+```
+
+---
+
+### present?
+
+```ruby
+"abc".present?   # true
+[].present?      # false
+{}.present?      # false
+```
+
+---
+
+### empty?
+
+```ruby
+"".empty?   # true
+[].empty?   # true
+{}.empty?   # true
+```
+
+>  **Important Difference**
+
+* `empty?` → works only for collections/strings
+* `blank?` → works for **nil, empty, or whitespace**
+
+---
+
+## 🔹 N+1 Query Problem
+
+### What is the N+1 Query Problem?
+
+The **N+1 query problem** occurs when:
+
+1. One query fetches parent records
+2. Additional queries are fired **for each child record**
+
+This usually happens due to **lazy loading**.
+
+---
+
+### Example (Bad Practice)
+
+```ruby
+User.all.each do |user|
+  puts user.posts.count
+end
+```
 
 
+ Causes **1 query for users + N queries for posts**
 
+---
 
+### Solution: Eager Loading using `includes`
 
+```ruby
+User.includes(:posts).each do |user|
+  puts user.posts.count
+end
+```
+
+✔ Fetches all data using **minimum queries**
+
+---
+
+#  Day 19 – Associations in Ruby on Rails
+
+Associations in Rails define **relationships between models (tables)**.
+They help **ActiveRecord** understand how records are connected and allow **easy data access** without writing complex SQL queries.
+
+### Example
+
+A **User** can have:
+
+* one **Vendor**
+* many **Posts**
+* many **Orders**
+
+---
+
+## 🔹 Types of Associations (Conceptual Level)
+
+There are **4 logical types** of relationships between database tables:
+
+### 1️⃣ One-to-One
+
+* One record in table A is linked to **one record** in table B
+* **Example:** `User → Profile`
+
+---
+
+### 2️⃣ One-to-Many
+
+* One record in table A is linked to **many records** in table B
+* **Example:** `User → Posts`
+
+---
+
+### 3️⃣ Many-to-One
+
+* Many records in table A belong to **one record** in table B
+* **Example:** `Posts → User`
+
+> 🔹 *This is the reverse of one-to-many and is implemented using `belongs_to`.*
+
+---
+
+### 4️⃣ Many-to-Many
+
+* Many records in table A are linked to many records in table B
+* **Example:** `Students ↔ Courses`
+
+---
+
+## 🔹 Ways to Define Associations in Rails
+
+Rails provides **6 association macros**:
+
+1. `has_one`
+2. `has_many`
+3. `belongs_to`
+4. `has_one :through`
+5. `has_many :through`
+6. `polymorphic association`
+
+---
+
+## 🔹 Polymorphic Association
+
+### What is a Polymorphic Association?
+
+A polymorphic association allows **a single model to belong to multiple models**.
+
+ One table acts as a **child for multiple parent tables**.
+
+---
+
+### Required Columns
+
+A polymorphic table must contain **two columns**:
+
+1. `record_type` – stores the parent model name
+2. `record_id` – stores the parent model’s primary key
+
+---
+
+### Example
+
+Active Storage uses polymorphic associations:
+
+* A file can belong to a **User**
+* A **Product**
+* A **Post**
+
+---
+
+## 🔹 Creating Associations Using Generate Commands (New Tables)
+
+### Step 1️⃣ Create Parent Model
+
+```ruby
+rails generate model User name:string email:string
+rails db:migrate
+```
+
+---
+
+### Step 2️⃣ Create Child Model with Reference
+
+```ruby
+rails generate model Vendor name:string location:string user:references
+rails db:migrate
+```
+
+### What `user:references` Does Automatically
+
+* Adds a `user_id` column
+* Creates a foreign key constraint
+* Builds **SQL-level association**
+
+---
+
+## 🔹 SQL-Level Associations (Database Side)
+
+After running migrations, Rails generates SQL relations.
+
+---
+
+### User Migration
+
+```ruby
+class CreateUsers < ActiveRecord::Migration[8.1]
+  def change
+    create_table :users do |t|
+      t.string :name
+      t.string :email
+
+      t.timestamps
+    end
+  end
+end
+```
+
+---
+
+### Vendor Migration
+
+```ruby
+class CreateVendors < ActiveRecord::Migration[8.1]
+  def change
+    create_table :vendors do |t|
+      t.string :name
+      t.string :location
+      t.references :user, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
+```
+
+---
+
+###  Important Note (Corrected Explanation)
+
+If you try to delete the **parent table (`users`) before the child table (`vendors`)**, you will get a **foreign key constraint error**.
+
+✔ Always delete **child tables first**, then parent tables
+✔ Or use `dependent: :destroy` in Rails models
+
+---
+
+## 🔹 Rails-Level Associations (Model Side)
+
+After database setup, we must define associations **inside models** so Rails understands the relationship.
+
+---
+
+### Vendor Model
+
+```ruby
+class Vendor < ApplicationRecord
+  belongs_to :user
+end
+```
+
+**Meaning:**
+
+* `vendors` table contains `user_id`
+* Each vendor belongs to **one user**
+* `belongs_to` is always written in **singular**
+
+---
+
+### User Model
+
+```ruby
+class User < ApplicationRecord
+  has_one :vendor
+end
+```
+
+**Meaning:**
+
+* One user can have **only one vendor**
+* User table does **not** store the foreign key
+
+>  **Note (clarified):**
+> Using `has_one :vendor` (singular) tells Rails that this is a **one-to-one relationship**.
+
+---
+
+## 🔹 How Rails Associations Help
+
+With proper associations, Rails provides:
+
+### Easy Data Access
+
+```ruby
+user.vendor
+vendor.user
+```
+
+### Additional Benefits
+
+* Automatic validations
+* Cleaner & readable code
+* Powerful query helpers
+* Less SQL writing
+
+---
+
+## 🔹 Creating Associations for an Existing Table
+
+### Generate Migration to Add Foreign Key
+
+```ruby
+rails generate migration AddProductToOrder product:references
+```
+
+---
+
+### Generated Migration File
+
+```ruby
+class AddProductToOrders < ActiveRecord::Migration[8.1]
+  def change
+    add_reference :orders, :product, null: true, foreign_key: true
+  end
+end
+```
+
+**What this does:**
+
+* Adds `product_id` column to `orders` table
+* Creates SQL-level association
+
+---
+
+## 🔹 Rails-Level Association for Existing Tables
+
+### Product Model
+
+```ruby
+class Product < ApplicationRecord
+  has_many :orders
+end
+```
+
+---
+
+### Order Model
+
+```ruby
+class Order < ApplicationRecord
+  belongs_to :product
+end
+```
+
+>  **Note (corrected):**
+> Using `has_many :orders` (plural) tells Rails this is a **one-to-many relationship**.
+
+---
+
+## 🔹 Useful Rails Association Methods
+
+```ruby
+User.create
+User.insert_all([{},{},{}])
+
+User.last.vendor.create
+```
+
+### Explanation
+
+* `User.last.vendor.create`
+
+  * Automatically sets `user_id`
+  * Creates a vendor linked to `User.last`
+
+---
 
 
 

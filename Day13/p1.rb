@@ -5,3 +5,11 @@ a4 = a1 || a2
 print a3 #[1, 3, 5]
 puts 
 print a4 #[1, 2, 3, 4, 5, 6]
+puts "uday".empty?
+puts a1.empty?
+puts "uday".nil?
+puts a1.nil?
+# puts "uday".blank?
+# puts a1.blank?
+# puts "uday".present?
+# puts a1.present?
