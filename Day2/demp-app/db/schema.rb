@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_05_061330) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_06_063650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -80,6 +80,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_061330) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "discount"
+    t.string "name"
+    t.boolean "status"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "count"
     t.datetime "created_at", null: false
@@ -95,6 +103,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_061330) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_offers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "offer_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_product_offers_on_offer_id"
+    t.index ["product_id"], name: "index_product_offers_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
@@ -103,6 +120,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_061330) do
     t.string "name"
     t.decimal "price"
     t.integer "stock"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products_tags", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "tag_id", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
@@ -125,5 +154,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_061330) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "orders", "products"
+  add_foreign_key "product_offers", "offers"
+  add_foreign_key "product_offers", "products"
   add_foreign_key "vendors", "users"
 end

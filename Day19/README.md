@@ -13,7 +13,7 @@ A **User** can have:
 
 ---
 
-## 🔹 Types of Associations (Conceptual Level)
+##  Types of Associations (Conceptual Level)
 
 There are **4 logical types** of relationships between database tables:
 
@@ -160,8 +160,8 @@ end
 
 If you try to delete the **parent table (`users`) before the child table (`vendors`)**, you will get a **foreign key constraint error**.
 
-✔ Always delete **child tables first**, then parent tables
-✔ Or use `dependent: :destroy` in Rails models
+ Always delete **child tables first**, then parent tables
+ Or use `dependent: :destroy` in Rails models
 
 ---
 
@@ -294,7 +294,6 @@ User.last.vendor.create
   * Creates a vendor linked to `User.last`
 
 ---
-
 
 
     

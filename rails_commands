@@ -74,7 +74,9 @@ rails db:rollback
 ``` ruby
 rails generate model modelname column1:datatype,column2:datatype tablename:references
 ```
-- To create comntr
+```ruby
+rails generate model ProductOffer product:references offer:references
+```
 
 
 
