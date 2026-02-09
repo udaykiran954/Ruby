@@ -15,3 +15,6 @@ class Palindrome_string
 end
 
 puts Palindrome_string.new.Palindrome("10101")
+
+str = 'uday';
+puts "hello" + str
