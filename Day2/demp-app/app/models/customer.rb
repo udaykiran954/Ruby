@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
   has_one_attached:profile_photo
   has_rich_text:about_me
+  belongs_to :order
   
    validates :name, format: { with: /\A[a-zA-Z ]+\z/, message: "Only letters are allowed" },presence: true
     validates :email, presence: true, uniqueness: true  

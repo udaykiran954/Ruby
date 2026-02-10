@@ -2,7 +2,10 @@ class Product < ApplicationRecord
    has_many_attached :product_image
   has_one_attached :invoice
   has_and_belongs_to_many :tags
-  has_many :offers, through: :product_offer
+#   has_many :offers, through: :product_offer
+  #many_to_many
+  has_many :subscriptions
+  has_many :offers, through: :subscriptions
   has_rich_text :review
   has_many :orders, dependent: :destroy
     # @status  = Product.all.limit(10).pluck(:is_active)

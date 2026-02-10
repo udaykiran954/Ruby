@@ -70,6 +70,10 @@ rails generate mailer ProductMailer
 ```
 rails db:rollback
 ```
+- To rollback the db until a specific step
+```ruby
+rails db:rollback STEP=
+```
 - To create a model with associations
 ``` ruby
 rails generate model modelname column1:datatype,column2:datatype tablename:references

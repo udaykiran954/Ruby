@@ -1,6 +1,9 @@
-class CreateProductOffers < ActiveRecord::Migration[8.1]
+class CreateSubscriptions < ActiveRecord::Migration[8.1]
   def change
-    create_table :product_offers do |t|
+    create_table :subscriptions do |t|
+      t.string :type
+      t.date :expiry_date
+      t.boolean :active
       t.references :product, null: false, foreign_key: true
       t.references :offer, null: false, foreign_key: true
 

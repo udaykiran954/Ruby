@@ -2341,12 +2341,25 @@ validates :student,presence:true
  end
  ```
 ---
+reload is method used in rails to reload the  cache
+Product.find(2).offers.reload
+Product.find(1).offer_ids
+Product.find(2).offers.empty?
+Product.find(1).offers.size
+Product.find(1).offers.exists?(name:"festive")
+product.find(1).offers.find_by(name:"festive")
+productObj.offers.create(attributes)
+productObj.offers.delete(offerObj)
+productObj.offers.clear
 
-
-
-
-
-
+to update extra column attriibutes in the third table (joins table) of has many through relationship -
+subscriptionObj.update(status: 'active', renewal_date: 1.month.from_now)
+To update a specific subscription within the collection
+productObj.subscriptions.where(offer_id: 5).update_all(status: 'active')
+To modify all subscriptions on a product
+productObj.subscriptions.each do |sub|
+  sub.update(status: 'expired') if sub.end_date < Date.today
+end
 
 
 
