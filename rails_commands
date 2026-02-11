@@ -82,7 +82,7 @@ rails generate model modelname column1:datatype,column2:datatype tablename:refer
 rails generate model ProductOffer product:references offer:references
 ```
 
-
+rails generate migration CreateTableVlog title:string:index author:string description:string
 
 
 

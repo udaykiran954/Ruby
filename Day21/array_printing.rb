@@ -38,3 +38,10 @@ puts sum
 
 puts [1, 3, 5, 6].any?{|e|e%2==0}
 puts [2, 4, 6].all?{|e|e%2==0}
+
+puts [1,2,3,1,2,3,12,2,3,1].uniq
+puts "uday".chars
+arr = "uday".chars
+a = {"name" => "uday","name2"=>"uday","name3"=>"uday"}
+
+puts a.values.uniq
