@@ -2648,16 +2648,6 @@ end
 * **One-to-One** using `has_one / belongs_to`
 * **One-to-Many** using `has_many / belongs_to`
 
-string text
-binary
-float integer decimal
-datetime timestamp date time
-rails db:migrate:redo -->to rerun last migration 
-rails db:migrate:redo STEP=2 --->to rerun until some steps 
-
-rails db:reset ->to reset the database
-when u r replicating the issue
-
 ---
 #  Day 23 – Rails Associations & Migrations
 
