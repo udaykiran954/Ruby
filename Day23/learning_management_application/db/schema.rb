@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_12_062526) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_12_072829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_12_062526) do
     t.datetime "exam_date"
     t.integer "total_marks"
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_final_exams_on_course_id"
+    t.index ["course_id"], name: "index_final_exams_on_course_id", unique: true
   end
 
   create_table "instructors", force: :cascade do |t|
