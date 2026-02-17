@@ -3886,27 +3886,5 @@ puts Simple.m2
 | ------------- | --------------- |
 | class_eval    | Instance method |
 | instance_eval | Class method    |
-
----
-
-# 🎯 Bonus: Why Meta Programming is Powerful
-
-It allows:
-
-* Dynamic method creation
-* DSL creation (like Rails)
-* Cleaner repetitive code
-* Flexible frameworks
-
-Example DSL in Rails:
-
-```ruby
-class Post < ApplicationRecord
-  validates :title, presence: true
-end
-```
-
-That `validates` method is meta programming magic.
-
 ---
 
