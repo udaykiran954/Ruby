@@ -36,10 +36,13 @@ module Mod2
         "this is m2 module method1"
     end
 end
-
+module Mod3
+end
 class Student < College
-    prepend Mod2,Mod1
-    include Mod1,Mod2
+    # prepend Mod2,Mod1
+    # include Mod1,Mod2
+# prepend Mod1,Mod2
+extend Mod1,Mod2
     attr_accessor :name,:age
     # attr_reader :name,:age#restrict to read
     # attr_writer :name,:age#restrict to modify
@@ -62,6 +65,7 @@ end
 
 # m = M.new("uday",21)
 # puts m.method1
+puts Student.singleton_class.ancestors
 s1 = Student.new("raj",20,"uday",40)
 puts s1.demonstrate
 puts s1.method1

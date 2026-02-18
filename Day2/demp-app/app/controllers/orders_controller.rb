@@ -16,8 +16,10 @@ class OrdersController < ApplicationController
 
   # POST /orders
 def create
-  @order = Order.new(order_params)
 
+  @order = Order.new(order_params)
+  @order.product_id = 1
+  @order.customer_id = 1
   respond_to do |format|
     if @order.save
       format.html { redirect_to @order, notice: "Order was successfully created." }
@@ -57,7 +59,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.expect(order: [ :details,:count])
+      params.expect(order: [ :details,:count,:customer_id,:product_id])
     end
 end
 

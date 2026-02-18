@@ -25,8 +25,12 @@ default: &default
 
 
 development:
+primary :
   <<: *default
   database: demp_app_development
+secondary :
+  <<: *default
+  database: demp_app_development_queue
   
 
   # The specified database role being used to connect to PostgreSQL.
